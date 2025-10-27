@@ -1,9 +1,10 @@
 annotation.processing.enabled=true
 annotation.processing.enabled.in.editor=false
-annotation.processing.processor.options=
 annotation.processing.processors.list=
 annotation.processing.run.all.processors=true
 annotation.processing.source.output=${build.generated.sources.dir}/ap-source-output
+application.title=Aplicacion1
+application.vendor=diaz
 build.classes.dir=${build.dir}/classes
 build.classes.excludes=**/*.java,**/*.form
 # This directory is removed when the project is cleaned:
@@ -24,15 +25,16 @@ debug.test.classpath=\
     ${run.test.classpath}
 debug.test.modulepath=\
     ${run.test.modulepath}
-# Files in build.classes.dir which should be excluded from distribution jar
-dist.archive.excludes=
 # This directory is removed when the project is cleaned:
 dist.dir=dist
-dist.jar=${dist.dir}/EuroConversor_1.jar
+dist.jar=${dist.dir}/Aplicacion1.jar
 dist.javadoc.dir=${dist.dir}/javadoc
+endorsed.classpath=
 excludes=
 includes=**
+jar.archive.disabled=${jnlp.enabled}
 jar.compress=false
+jar.index=${jnlp.enabled}
 javac.classpath=
 # Space-separated list of extra javac options
 javac.compilerargs=
@@ -41,8 +43,8 @@ javac.modulepath=
 javac.processormodulepath=
 javac.processorpath=\
     ${javac.classpath}
-javac.source=1.8
-javac.target=1.8
+javac.source=1.7
+javac.target=1.7
 javac.test.classpath=\
     ${javac.classpath}:\
     ${build.classes.dir}
@@ -61,7 +63,16 @@ javadoc.splitindex=true
 javadoc.use=true
 javadoc.version=false
 javadoc.windowtitle=
-main.class=es.uv.eu.euroconversor.EuroConversor
+jnlp.codebase.type=no.codebase
+jnlp.descriptor=application
+jnlp.enabled=false
+jnlp.mixed.code=default
+jnlp.offline-allowed=false
+jnlp.signed=false
+jnlp.signing=
+jnlp.signing.alias=
+jnlp.signing.keystore=
+main.class=es.uv.eu.aplicacion1.PeliculaModel
 manifest.file=manifest.mf
 meta.inf.dir=${src.dir}/META-INF
 mkdist.disabled=false
@@ -69,9 +80,9 @@ platform.active=default_platform
 run.classpath=\
     ${javac.classpath}:\
     ${build.classes.dir}
-# Space-separated list of JVM arguments used when running the project.
-# You may also define separate properties like run-sys-prop.name=value instead of -Dname=value.
-# To set system properties for unit tests define test-sys-prop.name=value:
+# Space-separated list of JVM arguments used when running the project
+# (you may also define separate properties like run-sys-prop.name=value instead of -Dname=value
+# or test-sys-prop.name=value to set system properties for unit tests):
 run.jvmargs=
 run.modulepath=\
     ${javac.modulepath}
