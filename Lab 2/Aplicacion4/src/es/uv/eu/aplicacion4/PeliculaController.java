@@ -2,6 +2,7 @@ package es.uv.eu.aplicacion4;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -39,7 +40,9 @@ public class PeliculaController {
                     System.exit(0);
                     break;
                 case "Top3":
+                    String[] topTitulos = model.getTitulosPorIds(new TopView(model).getTop());
                     System.out.println("PeliculaController: Menu 'Top 3'.");
+                    JOptionPane.showMessageDialog(null, "Las tres películas más recientes son: " + "\n" + "* " + topTitulos[0] + "\n" + "* " + topTitulos[1] + "\n" + "* " + topTitulos[2]);
                     break;
                 case "Resumen":
                     System.out.println("PeliculaController: Menu 'Resumen'.");

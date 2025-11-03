@@ -32,7 +32,7 @@ public class PeliculaController {
         @Override
         public void actionPerformed(ActionEvent ae){
             String command = ae.getActionCommand();
-            TopView topView = new TopView(model);
+            String[] topTitulos = model.getTitulosPorIds(null);
 
             switch(command){
                 case "buttonExit":
@@ -40,8 +40,8 @@ public class PeliculaController {
                     System.exit(0);
                     break;
                 case "Top3":
-                    int top[] = topView.getTop();
-                    String[] topTitulos = model.getTitulosPorIds(top);
+                    int top[] = model.getTop();
+                    String[] titulos = model.getTitulosPorIds(top);
                     System.out.println("PeliculaController: Menu 'Top 3'.");
                     JOptionPane.showMessageDialog(null, "Las tres películas más recientes son: " + "\n" + "* " + topTitulos[0] + "\n" + "* " + topTitulos[1] + "\n" + "* " + topTitulos[2]);
                     break;
