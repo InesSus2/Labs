@@ -31,9 +31,8 @@ public class NumberPanel extends JPanel{
             buttons[i] = new JButton(labels[i]);
             this.add(buttons[i]);
             buttons[i].setActionCommand("Botones");
-            
         }
-        //this.setSize(1, 1);
+
         this.setVisible(true);
     }
 

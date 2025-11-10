@@ -6,10 +6,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -44,8 +42,6 @@ public class OperationPanel extends JPanel{
         this.add(dolEur);
         this.add(eurDol);
         this.add(convert);
-        
-        this.setSize(400, 300);
 
         this.setVisible(true);
     }
@@ -55,13 +51,4 @@ public class OperationPanel extends JPanel{
         eurDol.addActionListener(listener);
         convert.addActionListener(listener);
     }
-    public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> {
-        JFrame frame = new JFrame("PruebaOp");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 150);
-        frame.add(new OperationPanel());
-        frame.setVisible(true);
-    });
-}
 }

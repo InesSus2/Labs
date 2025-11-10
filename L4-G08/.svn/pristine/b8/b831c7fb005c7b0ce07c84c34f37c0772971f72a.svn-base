@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -20,7 +19,6 @@ public class EuroConversorView extends JFrame{
     private final NumberPanel numberPanel;
     private final OperationPanel operationPanel;
     private final ClearPanel clearPanel;
-    private EuroConversorMenu euroConversorMenu;
 
     public EuroConversorView(){
         this.setTitle("EuroConversor");
@@ -30,24 +28,10 @@ public class EuroConversorView extends JFrame{
         numberPanel = new NumberPanel();
         operationPanel = new OperationPanel();
         clearPanel = new ClearPanel();
-        euroConversorMenu = new EuroConversorMenu();
 
         this.add(clearPanel, BorderLayout.SOUTH);
         this.add(numberPanel, BorderLayout.CENTER);
         this.add(operationPanel, BorderLayout.EAST);
         this.add(displayPanel, BorderLayout.NORTH);
-        this.setJMenuBar(euroConversorMenu);
-
-        this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Prueba EuroConversorView");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(300, 150);
-            frame.add(new EuroConversorView());
-            frame.setVisible(true);
-        });
     }
 }

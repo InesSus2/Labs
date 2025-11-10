@@ -20,15 +20,13 @@ public class ClearPanel extends JPanel {
     private JButton clearButton;
     
     public ClearPanel() {
-        clearButton = new JButton("CLEAR");
+        clearButton = new JButton("Clear");
         clearButton.setForeground(Color.blue);
-        clearButton.setActionCommand("LIMPIAR");
+        clearButton.setActionCommand("CLEAR");
         
-        this.setLayout(new BorderLayout());
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         this.add(clearButton);
-        
-        setPreferredSize(new Dimension(0, 30));
 
         this.setVisible(true);
     }
