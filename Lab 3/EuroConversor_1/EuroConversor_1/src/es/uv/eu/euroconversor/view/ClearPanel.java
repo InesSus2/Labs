@@ -1,14 +1,46 @@
-
-
 package es.uv.eu.euroconversor.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author EU (2016)
  */
+
+public class ClearPanel extends JPanel {
+    
+    private JButton clearButton;
+    
+    public ClearPanel() {
+        clearButton = new JButton("CLEAR");
+        clearButton.setForeground(Color.blue);
+        clearButton.setActionCommand("LIMPIAR");
+        
+        this.setLayout(new BorderLayout());
+        this.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        this.add(clearButton);
+        
+        setPreferredSize(new Dimension(0, 30));
+
+        this.setVisible(true);
+    }
+
+    public void setActionListener(ActionListener actionListener) {
+        clearButton.addActionListener(actionListener);
+    }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba NumberPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(300, 150);
+            frame.add(new ClearPanel());
+            frame.setVisible(true);
+        });
+    }
+}

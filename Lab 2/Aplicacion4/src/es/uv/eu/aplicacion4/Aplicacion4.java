@@ -2,8 +2,7 @@ package es.uv.eu.aplicacion4;
 /**
  * JavaApplication: controlador del programa
  * 
- * @author Natalia Tauste Rubio
- * @author Inés Jaso Pernod
+ * @author Entornos de Usuario
  */
 public class Aplicacion4 {
     /**

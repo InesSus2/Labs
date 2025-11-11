@@ -1,8 +1,6 @@
 package es.uv.eu.aplicacion4;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 public class PeliculaModel {
     private HashSet<Pelicula> peliculas;
     
@@ -28,25 +26,25 @@ public class PeliculaModel {
     }
 
     public String[] getTitulosPorIds(int[] top) {
-        String[] titulos = new String[3]; //siempre es 3
-        int i = 0;
+    String[] titulos = new String[3]; //siempre es 3
+    int i = 0;
 
-        // Recorremos los IDs guardados en el array 'top'
-        for (int x = 0; x < 3; x++) {
-            int idBuscado = top[x];
+    // Recorremos los IDs guardados en el array 'top'
+    for (int x = 0; x < top.length; x++) {
+        int idBuscado = top[x];
 
-            // Recorremos el HashSet de películas
-            for (Pelicula p : peliculas) {
-                if (p.getCodigo() == idBuscado) {
-                    titulos[i] = p.getTitulo();
-                    break; // cuando encuentra el id, pasa al siguiente
-                }
+        // Recorremos el HashSet de películas
+        for (Pelicula p : peliculas) {
+            if (p.getCodigo() == idBuscado) {
+                titulos[i] = p.getTitulo();
+                break; // cuando encuentra el id, pasa al siguiente
             }
-            i++;
         }
-
-        return titulos;
+        i++;
     }
+
+    return titulos;
+}
     
     @Override
     public String toString(){

@@ -55,7 +55,7 @@ package es.uv.eu.aplicacion4;
         this.genero = genero;
         codigo = proximoCodigo;
         proximoCodigo++;
-    }     
+    }
     
     /**
     * Devuelve el anyo de produccion de la pelicula.

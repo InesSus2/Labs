@@ -14,3 +14,27 @@ import javax.swing.JMenuItem;
  *
  * @author EU (2016)
  */
+
+public class EuroConversorMenu extends JMenuBar{
+    private JMenu menu;
+    private JMenuItem exit;
+    private JMenuItem changeRate;
+
+    public EuroConversorMenu(){
+        menu = new JMenu("EuroConversor");
+        exit = new JMenuItem("Salir");
+        changeRate = new JMenuItem("Cambiar tasa de cambio");
+        exit.setActionCommand("Exit");
+        changeRate.setActionCommand("ChangeRate");
+        menu.add(changeRate);
+        menu.add(exit);
+        this.add(menu);
+        
+        this.setVisible(true);
+    }
+
+    public void setActionListener(ActionListener actionListener){
+        exit.addActionListener(actionListener);
+        changeRate.addActionListener(actionListener);
+    }
+}

@@ -4,11 +4,65 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 
 /**
  *
- * @author 
+ * @author Ines Jaso Pernod
+ * @author Natalia Tauste Rubio
  */
+
+public class OperationPanel extends JPanel{
+    private JRadioButton dolEur;
+    private JRadioButton eurDol;
+    private final ButtonGroup grupo;
+    private JButton convert;
+
+    public OperationPanel(){
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        grupo = new ButtonGroup();
+        dolEur = new JRadioButton("Dolar-Euro");
+        eurDol = new JRadioButton("Euro-Dolar");
+        convert = new JButton("Convert");
+        
+        convert.setForeground(Color.blue);
+
+        grupo.add(dolEur);
+        grupo.add(eurDol);
+
+        dolEur.setSelected(true);
+        dolEur.setActionCommand("DolarEuro");
+        eurDol.setActionCommand("EuroDolar");
+        convert.setActionCommand("Convertir");
+        
+        this.add(dolEur);
+        this.add(eurDol);
+        this.add(convert);
+        
+        this.setSize(400, 300);
+
+        this.setVisible(true);
+    }
+
+    public void setActionListener(ActionListener listener){
+        dolEur.addActionListener(listener);
+        eurDol.addActionListener(listener);
+        convert.addActionListener(listener);
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("PruebaOp");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(300, 150);
+            frame.add(new OperationPanel());
+            frame.setVisible(true);
+        });
+    }
+}

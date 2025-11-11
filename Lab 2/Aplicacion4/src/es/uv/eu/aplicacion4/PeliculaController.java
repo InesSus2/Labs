@@ -2,7 +2,6 @@ package es.uv.eu.aplicacion4;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -33,6 +32,7 @@ public class PeliculaController {
         @Override
         public void actionPerformed(ActionEvent ae){
             String command = ae.getActionCommand();
+            TopView topView = new TopView(model);
 
             switch(command){
                 case "buttonExit":
@@ -40,7 +40,8 @@ public class PeliculaController {
                     System.exit(0);
                     break;
                 case "Top3":
-                    String[] topTitulos = model.getTitulosPorIds(new TopView(model).getTop());
+                    int top[] = topView.getTop();
+                    String[] topTitulos = model.getTitulosPorIds(top);
                     System.out.println("PeliculaController: Menu 'Top 3'.");
                     JOptionPane.showMessageDialog(null, "Las tres películas más recientes son: " + "\n" + "* " + topTitulos[0] + "\n" + "* " + topTitulos[1] + "\n" + "* " + topTitulos[2]);
                     break;

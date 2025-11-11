@@ -1,13 +1,81 @@
 package es.uv.eu.euroconversor.view;
 
-
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+/**
+ *
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
 
-    
-    
+public class EuroConversorView extends JFrame{
+    private final DisplayPanel displayPanel;
+    private final NumberPanel numberPanel;
+    private final OperationPanel operationPanel;
+    private final ClearPanel clearPanel;
+    private EuroConversorMenu euroConversorMenu;
 
+    public EuroConversorView(){
+        this.setTitle("EuroConversor");
+        this.setLayout(new BorderLayout());
+
+        displayPanel = new DisplayPanel();
+        numberPanel = new NumberPanel();
+        operationPanel = new OperationPanel();
+        clearPanel = new ClearPanel();
+        euroConversorMenu = new EuroConversorMenu();
+
+        this.add(clearPanel, BorderLayout.SOUTH);
+        this.add(numberPanel, BorderLayout.CENTER);
+        this.add(operationPanel, BorderLayout.EAST);
+        this.add(displayPanel, BorderLayout.NORTH);
+        this.setJMenuBar(euroConversorMenu);
+        this.setSize(400, 400);
+
+        this.setVisible(true);
+    }
+
+    public String getDisplayText(){
+        return displayPanel.getText();
+    }
+    /** Permite al controlador actualizar el display principal */
+    public void setDisplayText(String text) {
+        displayPanel.setDisplayText(text);
+    }
+
+    public void setToZero() {
+        displayPanel.setToZero();
+    }
+
+    public void setRateText(String rate) {
+        displayPanel.setRateText(rate);
+    }
+
+    public String getRateText() {
+        return displayPanel.getRateText();
+    }
+
+    public void setActionListener(ActionListener actionListener){
+        numberPanel.setActionListener(actionListener);
+        operationPanel.setActionListener(actionListener);
+        clearPanel.setActionListener(actionListener);
+        euroConversorMenu.setActionListener(actionListener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba EuroConversorView");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(300, 150);
+            frame.add(new EuroConversorView());
+            frame.setVisible(true);
+        });
+    }
+}
