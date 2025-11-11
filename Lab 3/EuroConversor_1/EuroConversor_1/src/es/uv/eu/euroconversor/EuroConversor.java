@@ -11,10 +11,10 @@ import es.uv.eu.euroconversor.view.EuroConversorView;
 
 /**
  *
- * @author Inés Jaso Pernod
- * @author Natalia Tauste Rubio
+ * @author 
  */
 public class EuroConversor {
+
     /**
      * @param args the command line arguments
      */
@@ -25,4 +25,5 @@ public class EuroConversor {
 
         view.setVisible(true);
     }
+    
 }

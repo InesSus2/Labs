@@ -23,14 +23,14 @@ public class OperationPanel extends JPanel{
     private final ButtonGroup grupo;
     private JButton convert;
 
-    public OperationPanel(){
+    public OperationPanel(){//JRadioButton dolEur, JRadioButton eurDol, JButton convert){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         grupo = new ButtonGroup();
         dolEur = new JRadioButton("Dolar-Euro");
         eurDol = new JRadioButton("Euro-Dolar");
         convert = new JButton("Convert");
-        
+
         convert.setForeground(Color.blue);
 
         grupo.add(dolEur);
@@ -57,12 +57,12 @@ public class OperationPanel extends JPanel{
     }
     
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("PruebaOp");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(300, 150);
-            frame.add(new OperationPanel());
-            frame.setVisible(true);
-        });
-    }
+    SwingUtilities.invokeLater(() -> {
+        JFrame frame = new JFrame("PruebaOp");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 150);
+        frame.add(new OperationPanel());
+        frame.setVisible(true);
+    });
+}
 }

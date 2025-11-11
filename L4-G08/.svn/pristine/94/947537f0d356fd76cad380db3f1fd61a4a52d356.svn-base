@@ -3,12 +3,12 @@ package es.uv.eu.euroconversor.view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+//import.javax.swing.border.Border;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,30 +34,27 @@ public class DisplayPanel extends JPanel{
         
         this.setBorder(border);
 
-        this.setBackground(new Color(180, 170, 105));
+            //Fondo verde tipo calculadora
+            // Puedes ajustar el tono si lo quieres más oscuro o más claro
+        setBackground(new Color(180, 220, 180)); // verde pastel
+        // setBackground(Color.decode("#99CC99")); // verde calculadora clásico
         
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        displayLabel = new JLabel("0");
+        displayLabel = new JLabel("0", SwingConstants.RIGHT);
         displayLabel.setFont(new Font("Consolas", Font.BOLD, 30));
+        //displayLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         displayLabel.setForeground(Color.BLACK); // texto oscuro sobre fondo claro
         displayLabel.setOpaque(false);
 
-        topPanel.setBackground(new Color(180, 170, 105));
-        topPanel.add(displayLabel);
-
         // --- Línea inferior (tasa de cambio) ---
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        rateLabel = new JLabel("Exchange rate: 1.11253");
+        rateLabel = new JLabel("Exchange rate 1.11253", SwingConstants.LEFT);//!!!!!!!!!!!!!!1
         rateLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+       // rateLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         rateLabel.setForeground(Color.BLACK);
         rateLabel.setOpaque(false);
-
-        bottomPanel.setBackground(new Color(180, 170, 105));
-        bottomPanel.add(rateLabel);
         
-        this.add(topPanel);
-        this.add(Box.createVerticalGlue());
-        this.add(bottomPanel);
+        add(displayLabel);
+        add(Box.createVerticalStrut(5));
+        add(rateLabel);    
     }
 
     public String getText(){
@@ -72,7 +69,7 @@ public class DisplayPanel extends JPanel{
     }
 
     public void setRateText(String text) {
-        rateLabel.setText("Exchange rate: " + text);
+        rateLabel.setText(text);
     }
 
     public String getRateText() {

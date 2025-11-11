@@ -1,0 +1,71 @@
+package es.uv.eu.euroconversor.view;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+//import.javax.swing.border.Border;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
+/**
+ *
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class DisplayPanel extends JPanel{
+    private JLabel displayLabel;   // Muestra la cantidad o resultado
+    private JLabel rateLabel;      // Muestra la tasa de cambio
+    private Border border;
+    
+    public DisplayPanel(){
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        border=BorderFactory.createLineBorder(Color.BLACK, 5);
+        
+        this.setBorder(border);
+
+            //Fondo verde tipo calculadora
+            // Puedes ajustar el tono si lo quieres más oscuro o más claro
+        setBackground(new Color(180, 220, 180)); // verde pastel
+        // setBackground(Color.decode("#99CC99")); // verde calculadora clásico
+        
+        displayLabel = new JLabel("0", SwingConstants.RIGHT);
+        displayLabel.setFont(new Font("Consolas", Font.BOLD, 30));
+        //displayLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        displayLabel.setForeground(Color.BLACK); // texto oscuro sobre fondo claro
+        displayLabel.setOpaque(false);
+
+        // --- Línea inferior (tasa de cambio) ---
+        rateLabel = new JLabel("Exchange rate 1.11253", SwingConstants.LEFT);//!!!!!!!!!!!!!!1
+        rateLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+       // rateLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        rateLabel.setForeground(Color.BLACK);
+        rateLabel.setOpaque(false);
+        
+        add(displayLabel);
+        add(Box.createVerticalStrut(5));
+        add(rateLabel);
+        
+}
+    
+    // --- Bloque temporal para probar visualmente ---
+public static void main(String[] args) {
+    SwingUtilities.invokeLater(() -> {
+        JFrame frame = new JFrame("Prueba DisplayPanel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 150);
+        frame.add(new DisplayPanel());
+        frame.setVisible(true);
+    });
+}
+
+
+}

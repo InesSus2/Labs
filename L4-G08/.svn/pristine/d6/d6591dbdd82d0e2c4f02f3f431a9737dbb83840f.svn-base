@@ -1,5 +1,6 @@
 package es.uv.eu.euroconversor.view;
 
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
@@ -37,7 +38,6 @@ public class EuroConversorView extends JFrame{
         this.add(operationPanel, BorderLayout.EAST);
         this.add(displayPanel, BorderLayout.NORTH);
         this.setJMenuBar(euroConversorMenu);
-        this.setSize(400, 400);
 
         this.setVisible(true);
     }

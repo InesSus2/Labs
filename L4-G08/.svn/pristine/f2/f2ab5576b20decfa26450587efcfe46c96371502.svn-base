@@ -17,9 +17,10 @@ import javax.swing.SwingUtilities;
 public class NumberPanel extends JPanel{
     private final JButton[] buttons;
     private final String[] labels = {
-        "0", "1", "2", "3",
-        "4", "5", "6", "7",
-        "8", "9", ".", "C"
+        "0", "1", "2",
+        "3", "4", "5",
+        "6", "7", "8",
+        "9", ".", "C"
     };
 
     public NumberPanel() {
@@ -31,6 +32,7 @@ public class NumberPanel extends JPanel{
             this.add(buttons[i]);
             buttons[i].setActionCommand("Botones");
         }
+        //this.setSize(1, 1);
         this.setVisible(true);
     }
 
@@ -38,16 +40,16 @@ public class NumberPanel extends JPanel{
         for (JButton button : buttons) {
             button.addActionListener(listener);
         }
-    }
+    }      
     // --- Bloque temporal para probar visualmente ---
     
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Prueba NumberPanel");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(300, 150);
-            frame.add(new NumberPanel());
-            frame.setVisible(true);
-        });
-    }
+    SwingUtilities.invokeLater(() -> {
+        JFrame frame = new JFrame("Prueba NumberPanel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 150);
+        frame.add(new NumberPanel());
+        frame.setVisible(true);
+    });
+}
 }
