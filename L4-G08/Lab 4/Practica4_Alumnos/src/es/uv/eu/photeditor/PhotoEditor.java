@@ -6,7 +6,8 @@ import es.uv.eu.photoeditor.view.PhotoEditorView;
 
 /**
  *
- * @author diaz
+ * @author Natalia Tauste Rubio
+ * @author Inés Jaso Pernod
  */
 public class PhotoEditor {
 
@@ -15,7 +16,7 @@ public class PhotoEditor {
      */
     public static void main(String[] args) {
         PhotoEditorModel model = new PhotoEditorModel();
-        PhotoEditorView view = new PhotoEditorView(model);
-        PhotoEditorController controlador = new PhotoEditorController(model, view);
+       // PhotoEditorView view = new PhotoEditorView(model);
+      //  PhotoEditorController controlador = new PhotoEditorController(model, view);
     }
 }

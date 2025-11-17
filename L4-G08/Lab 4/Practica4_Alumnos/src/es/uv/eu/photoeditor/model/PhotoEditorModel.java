@@ -11,11 +11,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- *
- * @author diaz
+ * 
+ * @author Natalia Tauste Rubio
+ * @author Inés Jaso Pernod
  */
 public class PhotoEditorModel {
-    private BufferedImage imagen;
+    private BufferedImage imagen; //Se utiliza un objeto de este tipo porque
+    //permite cargar inicialmente una imagen a partir de un chero
     private String imagenFileName = "";
 
     public PhotoEditorModel() {
