@@ -20,22 +20,9 @@ public class WidthPanel extends JPanel{
      private JSlider slider;
 
     public WidthPanel(){
-        /*
-        JPanel topPanel = new JPanel();
-        add(topPanel);
-
-
-        slider=new JSlider();
-        texto= new JLabel("Grosor del rectángulo: ");
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        
-        topPanel.add(texto);
-        topPanel.add(slider);
-        */
-        
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        texto= new JLabel("Grosor del rectángulo: ");
-        slider= new JSlider(1, 1000, 5);
+        texto = new JLabel("Grosor del rectángulo: ");
+        slider = new JSlider(1, 1000, 5);
         slider.setPaintTicks(true);          //que pinte las “rayitas”
         slider.setMajorTickSpacing(100);       //separación entre marcas “grandes”
         slider.setMinorTickSpacing(1);       //marcas pequeñas entre medias
