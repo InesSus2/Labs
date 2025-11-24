@@ -22,10 +22,10 @@ public class PhotoEditorModel {
 
     public PhotoEditorModel() {
         try {
-            imagenFileName = "/imagenes/imagen_00.jpg";
-            imagen = ImageIO.read(getClass().getResourceAsStream(imagenFileName));
+            imagenFileName = "imagenes/imagen_00.jpg";
+            imagen = ImageIO.read(new File(imagenFileName));
         }
-        catch (IOException | IllegalArgumentException e) {
+        catch (IOException e) {
             System.out.println("Problemas leyendo la imagen '" + this.imagenFileName + "'.");
             System.out.println("Motivo: " + e.getLocalizedMessage());
         }

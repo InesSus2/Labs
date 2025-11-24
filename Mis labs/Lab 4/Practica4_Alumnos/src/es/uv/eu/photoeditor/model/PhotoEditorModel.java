@@ -70,6 +70,8 @@ public class PhotoEditorModel {
         
         gr.setPaint(gradiente);
         gr.setStroke(new BasicStroke(width));
-        gr.draw(new Line2D.Double(x,y,x2,y2));       
-    }    
+        gr.draw(new Line2D.Double(x,y,x2,y2));
+            
+    }
+     
 }

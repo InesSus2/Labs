@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import es.uv.eu.photoeditor.model.PhotoEditorModel;
+import javax.swing.JSlider;
 
 /**
  *
@@ -45,10 +46,20 @@ public class PhotoEditorView extends JFrame{
         this.setVisible(true);
     }
 
-    public StatusPanel getStatusPanel() {
-        return this.panelEstado;
-    }
+        public StatusPanel getStatusPanel() {
+            return this.panelEstado;
+        }
 
+            public WidthPanel getWidthPanel() {
+            return panelGrosor;
+        }
+        
+        public JSlider getWidthSlider() {
+            return panelGrosor.getSlider();
+        }
+
+
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PhotoEditorModel modelo = new PhotoEditorModel();

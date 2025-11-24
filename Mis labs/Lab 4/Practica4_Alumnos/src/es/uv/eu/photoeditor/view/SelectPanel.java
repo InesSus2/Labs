@@ -32,6 +32,11 @@ public class SelectPanel extends JPanel{
         this.add(panelArriba);
         this.add(panelAbajo);
     }
+
+    public void setActionListener(ActionListener listener){
+        panelArriba.setActionListener(listener);
+        panelAbajo.setActionListener(listener);
+    }
     
       public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

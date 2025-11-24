@@ -34,10 +34,19 @@ public class PhotoEditorController {
         this.view = view;
 
         view.addWindowListener(new PhotoEditorControllerWindowListener());
-        /*
         view.setActionListener(new PhotoEditorControllerActionListener());
-        view.addMouseListener(new PhotoEditorControllerMouseListener());
-        */
+        //view.addMouseListener(new PhotoEditorControllerMouseListener());
+        
+        view.getWidthSlider().addChangeListener(e -> {
+            int valor = view.getWidthSlider().getValue();
+
+            // 1) Actualizar el modelo
+            model.setGrosorRectangulo(valor);
+
+            // 2) Actualizar la vista (StatusPanel)
+            view.getStatusPanel().setGrosRec(String.valueOf(valor));
+        });
+        
     }
 
     class PhotoEditorControllerWindowListener extends WindowAdapter{
