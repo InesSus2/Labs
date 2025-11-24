@@ -28,7 +28,7 @@ public class PhotoEditorView extends JFrame{
         this.setSize(1000, 900);
         
 
-        panelGrosor = new WidthPanel();
+        panelGrosor = new WidthPanel(panelEstado);
         panelSeleccion = new SelectPanel();
         panelSeleccion.setPreferredSize(new Dimension(300, 0));
         panelImagen = new ImagePanel();

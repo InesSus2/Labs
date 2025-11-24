@@ -115,13 +115,13 @@ public class ColorPanel extends JPanel{
     }
     
     //dos actionListeners para cada color panel
-       public void setActionListener(ActionListener listener) {
+    public void setActionListener(ActionListener listener) {
         for (JButton button : buttons) {
             button.addActionListener(listener);
         }
     }
        
-              public void setActionListener2(ActionListener listener) {
+    public void setActionListener2(ActionListener listener) {
         for (JButton button : buttons) {
             button.addActionListener(listener);
         }
