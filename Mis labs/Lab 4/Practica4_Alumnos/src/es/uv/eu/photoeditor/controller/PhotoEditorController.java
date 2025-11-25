@@ -6,11 +6,9 @@ package es.uv.eu.photoeditor.controller;
 
 import es.uv.eu.photoeditor.model.*;
 import es.uv.eu.photoeditor.view.*;
-
 import java.awt.Color;
 import java.awt.event.*;
 import java.io.File;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /*
@@ -34,10 +32,20 @@ public class PhotoEditorController {
         this.view = view;
 
         view.addWindowListener(new PhotoEditorControllerWindowListener());
-        /*
         view.setActionListener(new PhotoEditorControllerActionListener());
-        view.addMouseListener(new PhotoEditorControllerMouseListener());
-        */
+        //view.addMouseListener(new PhotoEditorControllerMouseListener());
+        view.getImagenPanel().addMouseListener(new PhotoEditorControllerMouseListener());
+        
+        view.getWidthSlider().addChangeListener(e -> {
+            int valor = view.getWidthSlider().getValue();
+
+            // 1) Actualizar el modelo
+            model.setGrosorRectangulo(valor);
+
+            // 2) Actualizar la vista (StatusPanel)
+            view.getStatusPanel().setGrosRec(String.valueOf(valor));
+        });
+        
     }
 
     class PhotoEditorControllerWindowListener extends WindowAdapter{
@@ -57,23 +65,101 @@ public class PhotoEditorController {
     }
     */
 
+    class PhotoEditorControllerMouseListener extends MouseAdapter {
+        private int x1 = -1, y1 = -1;
+        private int x2 = -1, y2 = -1;
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+            // CLICK IZQUIERDO → primer punto
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                x1 = e.getX();
+                y1 = e.getY();
+                System.out.println("Primer punto: (" + x1 + "," + y1 + ")");
+            }
+
+            // CLICK DERECHO → segundo punto → pintar rectángulo
+            else if (e.getButton() == MouseEvent.BUTTON3) {
+                x2 = e.getX();
+                y2 = e.getY();
+                System.out.println("Segundo punto: (" + x2 + "," + y2 + ")");
+
+                // Obtener datos del StatusPanel
+                int grosor = model.getGrosorRectangulo();
+                Color col1 = view.getStatusPanel().getCol1();
+                Color col2 = view.getStatusPanel().getCol2();
+
+                // Llamar al modelo para pintar
+                model.pintaRectangulo(x1, y1, x2, y2, grosor, col2, col1);
+
+                // Repintar la vista
+                view.getImagenPanel().repaint();
+            }
+        }
+    }
+
     class PhotoEditorControllerActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
             String command = ae.getActionCommand();
             switch(command){
-                case "BotonesColor":
-                    System.out.println("PhotoEditorController: Acción recibida - Botones");
+                case "CargarImagen":
+                    System.out.println("PhotoEditorController: Acción recibida - CargarImagen");
 
-                    // Todos los botones de color deben tener ActionCommand: "BotonesColor_<nPanel>_<ColorName>"
+                    JFileChooser selectorCargar = new JFileChooser();
+                    selectorCargar.setFileFilter(
+                        new FileNameExtensionFilter("Imágenes (JPG, PNG, GIF, TIFF)", 
+                            "jpg", "png", "gif", "tiff")
+                    );
+
+                    int opcionCargar = selectorCargar.showOpenDialog(view);
+
+                    if (opcionCargar == JFileChooser.APPROVE_OPTION) {
+                        File ficheroCargar = selectorCargar.getSelectedFile();
+                        model.loadImagen(ficheroCargar);
+                        System.out.println("Imagen cargada: " + ficheroCargar.getAbsolutePath());
+                        view.repaint();  // necesario para que se vea la nueva imagen
+                    }
+                    break;
+                case "GuardarImagen":
+                    System.out.println("PhotoEditorController: Acción recibida - GuardarImagen");
+                    
+                    JFileChooser selectorGuardar = new JFileChooser();
+                    selectorGuardar.setFileFilter(new FileNameExtensionFilter("Imágenes JPG (*.jpg)", "jpg"));
+
+                    int opcionGuardar = selectorGuardar.showSaveDialog(view);
+
+                    if (opcionGuardar == JFileChooser.APPROVE_OPTION) {
+
+                        File ficheroGuardar = selectorGuardar.getSelectedFile();
+                        String path = ficheroGuardar.getAbsolutePath();
+
+                        // Si no tiene extensión, añadimos .jpg
+                        if (!path.toLowerCase().endsWith(".jpg")) {
+                            ficheroGuardar = new File(path + ".jpg");
+                        }
+
+                        model.saveImagen(ficheroGuardar);
+
+                        System.out.println("Imagen guardada en: " + ficheroGuardar.getAbsolutePath());
+
+                        view.repaint();
+                    }
+                    break;
+                case "Salir":
+                    System.out.println("PhotoEditorController: Acción recibida - Salir");
+                    System.exit(0);
+                    break;
+                default:
                     if (command.startsWith("BotonesColor_")) {
-
+                        System.out.println("PhotoEditorController: Acción recibida - BotonesColor_");
                         String[] partes = command.split("_");
-                        int panel = Integer.parseInt(partes[1]);  // 1 = panelArriba, 2 = panelAbajo
-                        String colorName = partes[2];            // Ej: Rojo, Azul, GrisClaro
+                        int panel = Integer.parseInt(partes[1]);  
+                        String colorName = partes[2];
 
-                        // Convertir nombre de color a java.awt.Color
                         Color colorSeleccionado;
+
                         switch(colorName) {
                             case "Negro":
                                 colorSeleccionado = Color.BLACK;
@@ -116,9 +202,9 @@ public class PhotoEditorController {
                                 break;
                             default:
                                 colorSeleccionado = Color.BLACK;
+                                break;
                         }
 
-                        // Actualizar StatusPanel según el panel
                         if(panel == 1){
                             view.getStatusPanel().setCol1(colorSeleccionado);
                         } else if(panel == 2){
@@ -127,48 +213,7 @@ public class PhotoEditorController {
 
                         System.out.println("Panel: " + panel + " | Color: " + colorName);
                     }
-
-                    break;
-                case "CargarImagen":
-                    System.out.println("PhotoEditorController: Acción recibida - CargarImagen");
-
-                    JFileChooser selectorCargar = new JFileChooser();
-                    selectorCargar.setFileFilter(
-                        new FileNameExtensionFilter("Imágenes (JPG, PNG, GIF, TIFF)", 
-                            "jpg", "png", "gif", "tiff")
-                    );
-
-                    int opcionCargar = selectorCargar.showOpenDialog(view);
-
-                    if (opcionCargar == JFileChooser.APPROVE_OPTION) {
-                        File ficheroCargar = selectorCargar.getSelectedFile();
-                        model.loadImagen(ficheroCargar);
-                        System.out.println("Imagen cargada: " + ficheroCargar.getAbsolutePath());
-                        view.repaint();  // necesario para que se vea la nueva imagen
-                    }
-                    break;
-                case "GuardarImagen":
-                    System.out.println("PhotoEditorController: Acción recibida - GuardarImagen");
-                    
-                    JFileChooser selectorGuardar = new JFileChooser();
-                    selectorGuardar.setFileFilter(
-                        new FileNameExtensionFilter("Imágenes (JPG, PNG, GIF, TIFF)", 
-                            "jpg", "png", "gif", "tiff")
-                    );
-
-                    int opcionGuardar = selectorGuardar.showOpenDialog(view);
-
-                    if (opcionGuardar == JFileChooser.APPROVE_OPTION) {
-                        File ficheroCargar = selectorGuardar.getSelectedFile();
-                        model.saveImagen(ficheroCargar);
-                        System.out.println("Imagen cargada: " + ficheroCargar.getAbsolutePath());
-                        view.repaint();  // necesario para que se vea la nueva imagen
-                    }
-                    break;
-                case "Salir":
-                    System.out.println("PhotoEditorController: Acción recibida - Salir");
-                    System.exit(0);
-                    break;
+                break;
             }
         }
     }

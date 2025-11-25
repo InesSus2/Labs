@@ -22,10 +22,10 @@ public class PhotoEditorModel {
 
     public PhotoEditorModel() {
         try {
-            imagenFileName = "imagenes/imagen_00.jpg";
-            imagen = ImageIO.read(new File(imagenFileName));
+            imagenFileName = "/imagenes/imagen_00.jpg";
+            imagen = ImageIO.read(getClass().getResourceAsStream(imagenFileName));
         }
-        catch (IOException e) {
+        catch (IOException | IllegalArgumentException e) {
             System.out.println("Problemas leyendo la imagen '" + this.imagenFileName + "'.");
             System.out.println("Motivo: " + e.getLocalizedMessage());
         }
@@ -64,14 +64,33 @@ public class PhotoEditorModel {
             }
         }
     }
-    public void pintaRectangulo (int x, int y, int x2, int y2, int width, Color color2, Color color1){
-        Graphics2D gr = (Graphics2D)imagen.getGraphics();
-        GradientPaint gradiente= new GradientPaint(0,0,color2, 175,175, color1, true);
-        
+
+    public void pintaRectangulo(int x1, int y1, int x2, int y2, int width, Color color2, Color color1){
+        if(imagen == null) return;
+
+        Graphics2D gr = imagen.createGraphics();
+        GradientPaint gradiente = new GradientPaint(0, 0, color2, imagen.getWidth(), imagen.getHeight(), color1, true);
+
         gr.setPaint(gradiente);
         gr.setStroke(new BasicStroke(width));
-        gr.draw(new Line2D.Double(x,y,x2,y2));
-            
+
+        int rx = Math.min(x1, x2);
+        int ry = Math.min(y1, y2);
+        int rw = Math.abs(x2 - x1);
+        int rh = Math.abs(y2 - y1);
+
+        gr.drawRect(rx, ry, rw, rh); // dibuja borde
+        gr.dispose();
     }
-     
+    
+    private int grosorRectangulo = 0;
+
+    public void setGrosorRectangulo(int grosor) {
+        //this.grosorRectangulo = grosor;
+        //notifyObservers(); // o el método que use tu modelo
+    }
+
+    public int getGrosorRectangulo() {
+        return this.grosorRectangulo;
+    }
 }

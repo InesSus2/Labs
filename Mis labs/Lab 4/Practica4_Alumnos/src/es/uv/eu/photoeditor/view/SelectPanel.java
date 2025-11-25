@@ -12,8 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.JPanel;
-
-//import es.uv.eu.photoeditor.view.ColorPanel;
+import es.uv.eu.photoeditor.view.ColorPanel;
 /**
  *
  * @author Natalia Tauste Rubio

@@ -54,8 +54,7 @@ public class ColorPanel extends JPanel{
         firstButton.setBorder(borde);
         firstButton.setPreferredSize(dimen);
 
-        // ✔ COMMAND ÚNICO
-        firstButton.setActionCommand("COLOR_" + n + "_" + labels[0].replace(" ", ""));
+        firstButton.setActionCommand("BotonesColor_" + n + "_" + labels[0].replace(" ", ""));
         
         buttons[0] = firstButton;
         this.add(firstButton);
@@ -65,20 +64,49 @@ public class ColorPanel extends JPanel{
             Color c;
 
             switch (labels[i]) {
-                case "Negro": c = Color.BLACK; buttons[i].setForeground(Color.WHITE); break;
-                case "Cyan": c = Color.CYAN; break;
-                case "Gris oscuro": c = Color.DARK_GRAY; buttons[i].setForeground(Color.WHITE); break;
-                case "Gris": c = Color.GRAY; break;
-                case "Gris claro": c = Color.LIGHT_GRAY; break;
-                case "Magenta": c = Color.MAGENTA; break;
-                case "Naranja": c = Color.ORANGE; break;
-                case "Rosa": c = Color.PINK; break;
-                case "Amarillo": c = Color.YELLOW; break;
-                case "Blanco": c = Color.WHITE; break;
-                case "Rojo": c = Color.RED; break;
-                case "Azul": c = Color.BLUE; break;
-                case "Verde": c = Color.GREEN; break;
-                default: c = Color.BLACK;
+                case "Negro":
+                    c = Color.BLACK; buttons[i].setForeground(Color.WHITE);
+                    break;
+                case "Cyan":
+                    c = Color.CYAN;
+                    break;
+                case "Gris oscuro":
+                    c = Color.DARK_GRAY;
+                    buttons[i].setForeground(Color.WHITE);
+                    break;
+                case "Gris":
+                    c = Color.GRAY;
+                    break;
+                case "Gris claro":
+                    c = Color.LIGHT_GRAY;
+                    break;
+                case "Magenta":
+                    c = Color.MAGENTA;
+                    break;
+                case "Naranja":
+                    c = Color.ORANGE;
+                    break;
+                case "Rosa":
+                    c = Color.PINK;
+                    break;
+                case "Amarillo":
+                    c = Color.YELLOW;
+                    break;
+                case "Blanco":
+                    c = Color.WHITE;
+                    break;
+                case "Rojo":
+                    c = Color.RED;
+                    break;
+                case "Azul":
+                    c = Color.BLUE;
+                    break;
+                case "Verde":
+                    c = Color.GREEN;
+                    break;
+                default:
+                    c = Color.BLACK;
+                    break;
             }
 
             buttons[i].setBackground(c);

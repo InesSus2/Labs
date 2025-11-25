@@ -32,7 +32,7 @@ public class StatusPanel extends JPanel{
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         pincel = new JLabel("Grosor del rectángulo: ");
-        grosRec = new JTextArea();
+        grosRec = new JTextArea("1");
         grosRec.setEditable(false);
         grosRec.setPreferredSize(new Dimension(35, 15));
         grosRec.setMaximumSize(new Dimension(35, 15));
@@ -68,8 +68,15 @@ public class StatusPanel extends JPanel{
         this.grosRec.setText(grosRec);
     }
 
+    public Color getCol1() {
+        return this.col1.getBackground();
+    }
     public void setCol1(Color c1) {
         this.col1.setBackground(c1);
+    }
+
+    public Color getCol2() {
+        return this.col2.getBackground();
     }
 
     public void setCol2(Color c2) {

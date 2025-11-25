@@ -47,6 +47,10 @@ public class WidthPanel extends JPanel{
         this.add(slider);
     }
      
+    public JSlider getSlider() {
+        return slider;
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba NumberPanel");

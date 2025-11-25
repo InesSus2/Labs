@@ -6,10 +6,12 @@ package es.uv.eu.photoeditor.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import es.uv.eu.photoeditor.model.PhotoEditorModel;
+import javax.swing.JSlider;
 
 /**
  *
@@ -32,7 +34,7 @@ public class PhotoEditorView extends JFrame{
         panelGrosor = new WidthPanel(panelEstado);
         panelSeleccion = new SelectPanel();
         panelSeleccion.setPreferredSize(new Dimension(300, 0));
-        panelImagen = new ImagePanel();
+        panelImagen = new ImagePanel(modelo);
         panelEstado = new StatusPanel();
         menu = new PhotoEditorMenuBar();
 
@@ -49,6 +51,23 @@ public class PhotoEditorView extends JFrame{
         return this.panelEstado;
     }
 
+    public WidthPanel getWidthPanel() {
+        return panelGrosor;
+    }
+    
+    public JSlider getWidthSlider() {
+        return panelGrosor.getSlider();
+    }
+
+    public void setActionListener (ActionListener actionListener) {
+        menu.setActionListener(actionListener);
+        panelSeleccion.setActionListener(actionListener);
+    }
+
+    public ImagePanel getImagenPanel() {
+        return this.panelImagen;
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PhotoEditorModel modelo = new PhotoEditorModel();
