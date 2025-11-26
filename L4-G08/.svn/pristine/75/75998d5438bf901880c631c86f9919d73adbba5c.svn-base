@@ -5,7 +5,6 @@
 package es.uv.eu.photoeditor.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
@@ -13,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import es.uv.eu.photoeditor.model.PhotoEditorModel;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -48,7 +46,7 @@ public class PhotoEditorView extends JFrame{
 
         this.setVisible(true);
     }
-    
+
     public StatusPanel getStatusPanel() {
         return this.panelEstado;
     }
@@ -61,13 +59,13 @@ public class PhotoEditorView extends JFrame{
         return panelGrosor.getSlider();
     }
 
-    public ImagePanel getImagenPanel() {
-        return this.panelImagen;
-    }
-
     public void setActionListener (ActionListener actionListener) {
         menu.setActionListener(actionListener);
         panelSeleccion.setActionListener(actionListener);
+    }
+
+    public ImagePanel getImagenPanel() {
+        return this.panelImagen;
     }
     
     public static void main(String[] args) {
