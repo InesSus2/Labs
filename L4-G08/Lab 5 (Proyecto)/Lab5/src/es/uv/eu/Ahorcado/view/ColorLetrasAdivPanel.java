@@ -1,0 +1,44 @@
+package Ahorcado.view;
+
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class ColorLetrasAdivPanel extends JPanel{
+    private JLabel coloresAdiv;
+    private JComboBox<String> CBColoresLetrasAdiv;
+    private String[] colores = {"Rojo", "Azul", "Verde", "Amarillo", "Naranja", "Rosa", "Negro", "Blanco"};
+
+    public ColorLetrasAdivPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        coloresAdiv = new JLabel("COLOR DE LAS LETRAS ADIVINADAS:");
+        CBColoresLetrasAdiv = new JComboBox<>(colores);
+        CBColoresLetrasAdiv.setActionCommand("ColoresLetrasAdiv"); ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
+
+        coloresAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
+        CBColoresLetrasAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(coloresAdiv);
+        this.add(CBColoresLetrasAdiv);
+    }
+
+    public void setActionListener(ActionListener actionListener){ ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
+        CBColoresLetrasAdiv.addActionListener(actionListener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba ColorLetrasAdivPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new ColorLetrasAdivPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}

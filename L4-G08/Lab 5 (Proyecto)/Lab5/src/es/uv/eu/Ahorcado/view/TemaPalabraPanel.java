@@ -1,0 +1,53 @@
+package Ahorcado.view;
+
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+
+public class TemaPalabraPanel extends JPanel {
+    private JLabel texto;
+    private JComboBox<String> CBTemasPalabra;
+    private String[] temas = {"Animales", "Frutas", "Geografía"};
+
+    public TemaPalabraPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        texto = new JLabel("TEMA DE LA PALABRA:");
+        CBTemasPalabra = new JComboBox<>(temas);
+        CBTemasPalabra.setMaximumSize(new Dimension(150, 20));
+
+        CBTemasPalabra.setActionCommand("TemasPalabra");
+
+        texto.setAlignmentX(Component.CENTER_ALIGNMENT);
+        CBTemasPalabra.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(texto);
+        this.add(CBTemasPalabra);
+    }
+
+    /*
+    public JComboBox<String> getComboBox() {
+        return CBTemasPalabra;
+    }
+    */
+
+    public void setActionListener(ActionListener actionListener){
+        CBTemasPalabra.addActionListener(actionListener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba TemaPalabraPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 300);
+            frame.add(new TemaPalabraPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}

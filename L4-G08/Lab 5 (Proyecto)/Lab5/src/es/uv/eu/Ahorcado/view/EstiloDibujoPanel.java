@@ -1,0 +1,49 @@
+package Ahorcado.view;
+
+import javax.swing.BoxLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class EstiloDibujoPanel extends JPanel{
+    private JLabel texto;
+    private JComboBox<String> CBEstiloDibujo;
+    private String[] estilos = {"Etilo 1", "Estilo 2", "Estilo 3"};
+
+    public EstiloDibujoPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        texto = new JLabel("ESTILO DEL DIBUJO:");
+        CBEstiloDibujo = new JComboBox<>(estilos);
+        CBEstiloDibujo.setMaximumSize(new Dimension(150, 20));
+
+        CBEstiloDibujo.setActionCommand("EstilosDibujo");
+
+        texto.setAlignmentX(Component.CENTER_ALIGNMENT);
+        CBEstiloDibujo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(texto);
+        this.add(CBEstiloDibujo);
+
+        this.setVisible(true);
+    }
+
+    public void setActionListener(ActionListener actionListener){
+        CBEstiloDibujo.addActionListener(actionListener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba EstiloDibujoPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 300);
+            frame.add(new EstiloDibujoPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}
