@@ -18,7 +18,7 @@ public class ColorLetrasAdivPanel extends JPanel{
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         coloresAdiv = new JLabel("COLOR DE LAS LETRAS ADIVINADAS:");
         CBColoresLetrasAdiv = new JComboBox<>(colores);
-        CBColoresLetrasAdiv.setActionCommand("ColoresLetrasAdiv");
+        CBColoresLetrasAdiv.setActionCommand("ColoresLetrasAdiv"); ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
 
         coloresAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
         CBColoresLetrasAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -27,7 +27,7 @@ public class ColorLetrasAdivPanel extends JPanel{
         this.add(CBColoresLetrasAdiv);
     }
 
-    public void setActionListener (ActionListener actionListener){
+    public void setActionListener(ActionListener actionListener){ ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
         CBColoresLetrasAdiv.addActionListener(actionListener);
     }
 

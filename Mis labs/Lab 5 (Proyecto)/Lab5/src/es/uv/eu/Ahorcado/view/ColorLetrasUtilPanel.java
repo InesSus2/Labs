@@ -16,9 +16,9 @@ public class ColorLetrasUtilPanel extends JPanel{
 
     public ColorLetrasUtilPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        coloresUtil = new JLabel("COLOR DE LAS LETRAS UTILIZADAS:");
+        coloresUtil = new JLabel("COLOR DE LAS LETRAS ADIVINADAS:");
         CBColoresLetrasUtil = new JComboBox<>(colores);
-        CBColoresLetrasUtil.setActionCommand("ColoresLetrasUtil");
+        CBColoresLetrasUtil.setActionCommand("ColoresLetrasUtil"); ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
 
         coloresUtil.setAlignmentX(Component.CENTER_ALIGNMENT);
         CBColoresLetrasUtil.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -27,7 +27,7 @@ public class ColorLetrasUtilPanel extends JPanel{
         this.add(CBColoresLetrasUtil);
     }
 
-    public void setActionListener(ActionListener actionListener){
+    public void setActionListener(ActionListener actionListener){ ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
         CBColoresLetrasUtil.addActionListener(actionListener);
     }
 

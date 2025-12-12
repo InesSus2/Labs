@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 public class EstiloDibujoPanel extends JPanel{
     private JLabel texto;
     private JComboBox<String> CBEstiloDibujo;
-    private String[] estilos = {"🩰 Clásico", "🧸 Peluche", "🐱 Hello Kitty"};
+    private String[] estilos = {"Etilo 1", "Estilo 2", "Estilo 3"};
 
     public EstiloDibujoPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

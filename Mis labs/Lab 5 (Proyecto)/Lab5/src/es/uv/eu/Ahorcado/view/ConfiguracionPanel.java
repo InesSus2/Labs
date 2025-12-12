@@ -1,12 +1,11 @@
 package Ahorcado.view;
 
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 public class ConfiguracionPanel extends JPanel{
@@ -15,7 +14,6 @@ public class ConfiguracionPanel extends JPanel{
     private TemaPalabraPanel temaPalabraPanel;
     private EstiloDibujoPanel estiloDibujoPanel;
     private ColorLetrasPanel colorLetrasPanel;
-    private JButton comenzar;
 
     public ConfiguracionPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -25,9 +23,6 @@ public class ConfiguracionPanel extends JPanel{
         temaPalabraPanel = new TemaPalabraPanel();
         estiloDibujoPanel = new EstiloDibujoPanel();
         colorLetrasPanel = new ColorLetrasPanel();
-        comenzar = new JButton("COMENZAR PARTIDA");
-        comenzar.setActionCommand("ComenzarPartida");
-        comenzar.setAlignmentX(CENTER_ALIGNMENT);
 
         this.add(nombreUsuPanel);
         this.add(Box.createRigidArea(new Dimension(0, 30)));
@@ -38,18 +33,8 @@ public class ConfiguracionPanel extends JPanel{
         this.add(estiloDibujoPanel);
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(colorLetrasPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(comenzar);
 
         this.setVisible(true);
-    }
-
-    public void setActionListener(ActionListener actionListener){
-        ///numeroLetrasPanel.setActionListener(actionListener); ///< TIENE EL METODO getValue()
-        temaPalabraPanel.setActionListener(actionListener);
-        estiloDibujoPanel.setActionListener(actionListener);
-        colorLetrasPanel.setActionListener(actionListener);
-        comenzar.addActionListener(actionListener);
     }
 
     public static void main(String[] args) {

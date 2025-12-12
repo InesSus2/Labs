@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class TemaPalabraPanel extends JPanel {
     private JLabel texto;
     private JComboBox<String> CBTemasPalabra;
-    private String[] temas = {"🐾 Animales", "🍎 Frutas", "🌍 Geografía"};
+    private String[] temas = {"Animales", "Frutas", "Geografía"};
 
     public TemaPalabraPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

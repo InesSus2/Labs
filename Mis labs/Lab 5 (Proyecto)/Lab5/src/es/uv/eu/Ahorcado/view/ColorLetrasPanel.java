@@ -1,6 +1,6 @@
 package Ahorcado.view;
 
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,10 +21,12 @@ public class ColorLetrasPanel extends JPanel{
         this.setVisible(true);
     }
 
+    /*
     public void setActionListener(ActionListener actionListener){
-        colorLetrasAdivPanel.setActionListener(actionListener);
-        colorLetrasUtilPanel.setActionListener(actionListener);
+        CBColoresLetrasAdiv.addActionListener(actionListener);
+        CBColoresLetrasUtil.addActionListener(actionListener);
     }
+    */
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
