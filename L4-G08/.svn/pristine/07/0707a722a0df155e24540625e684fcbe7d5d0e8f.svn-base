@@ -1,0 +1,40 @@
+package Ahorcado.view;
+
+import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class ImagenesPanel extends JPanel{
+    private TituloPanel tituloPanel;
+    private ImagenIniPanel imagenJuegoPanel;
+
+    public ImagenesPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
+        
+        tituloPanel = new TituloPanel();
+        imagenJuegoPanel = new ImagenIniPanel();
+
+        this.add(tituloPanel);
+        this.add(imagenJuegoPanel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba ImagenesPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new ImagenesPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}
