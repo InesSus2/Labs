@@ -1,0 +1,43 @@
+package Ahorcado.view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class AhorcadoView extends JFrame {
+    private AhorcadoMenuBar menu;
+    private ImagenesPanel imagenesPanel;
+    private ConfiguracionPanel configuracionPanel;
+
+    public AhorcadoView() {
+        this.setLayout(new BorderLayout());
+        this.setBackground(Color.WHITE);
+        menu = new AhorcadoMenuBar();
+        imagenesPanel = new ImagenesPanel();
+        configuracionPanel = new ConfiguracionPanel();
+
+        this.setJMenuBar(menu);
+        this.add(imagenesPanel, BorderLayout.WEST);
+        this.add(configuracionPanel, BorderLayout.CENTER);
+        this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba InicioPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new AhorcadoView());
+            
+            frame.setVisible(true);
+        });
+    }
+}

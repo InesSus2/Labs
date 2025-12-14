@@ -1,0 +1,37 @@
+package Ahorcado.view;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class GameSouthPanel extends JPanel{
+    private PalabrasAdivJuegoPanel palabrasAdivJuegoPanel;
+    private IntroduceLetraPanel introduceLetraPanel;
+
+    public GameSouthPanel(int numLetters){
+        this.setLayout(new BorderLayout());
+        palabrasAdivJuegoPanel = new PalabrasAdivJuegoPanel(numLetters);
+        introduceLetraPanel = new IntroduceLetraPanel();
+
+        palabrasAdivJuegoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        introduceLetraPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        this.add(palabrasAdivJuegoPanel, BorderLayout.WEST);
+        this.add(introduceLetraPanel, BorderLayout.EAST);
+
+        this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba GameSouthPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(new GameSouthPanel(3));
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
+    }
+}

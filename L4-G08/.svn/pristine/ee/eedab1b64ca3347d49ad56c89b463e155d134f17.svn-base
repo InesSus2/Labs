@@ -21,7 +21,7 @@ import javax.swing.SwingUtilities;
 public class ColorLetrasAdivPanel extends JPanel{
     private JLabel coloresAdiv;
     private JComboBox<String> CBColoresLetrasAdiv;
-    private String[] colores = {"🟥 Rojo", "🟦 Azul", "🟩 Verde", "🟨 Amarillo", "🟧 Naranja"};
+    private String[] colores = {"🟥 Rojo", "🟦 Azul", "🟩 Verde", "🟨 Amarillo", "🟧 Naranja", "🟪 Morado", "⬛ Negro", "⬜ Blanco"};
 
     public ColorLetrasAdivPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

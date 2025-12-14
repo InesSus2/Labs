@@ -1,0 +1,39 @@
+package Ahorcado.view;
+
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class ImagenJuegoPanel extends JPanel {
+    ///PANEL PARA PONER LA IMAGEN DEL AHORCADO
+    private JLabel imagenAhorcado;
+    public ImagenJuegoPanel() {
+        // Constructor vacío por ahora
+        this.setBackground(Color.WHITE);
+
+        imagenAhorcado = new JLabel("IMAGEN INICIO DEL AHORCADO");
+
+        this.add(imagenAhorcado);
+
+        this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba ImagenJuegoPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new ImagenJuegoPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}

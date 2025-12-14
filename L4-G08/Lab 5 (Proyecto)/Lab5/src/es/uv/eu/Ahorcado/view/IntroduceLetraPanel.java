@@ -1,0 +1,62 @@
+package Ahorcado.view;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+
+public class IntroduceLetraPanel extends JPanel{
+    private JLabel introduceLetraLabel;
+    private JTextField introduceLetraField;
+    private JButton aceptarLetraButton;
+
+    public IntroduceLetraPanel() {
+        this.setLayout(new BorderLayout(10, 0));
+
+        introduceLetraLabel = new JLabel("Introduce la letra:");
+        introduceLetraField = new JTextField();
+        aceptarLetraButton = new JButton("OK");
+
+        introduceLetraField.setPreferredSize(new Dimension(150, 20));
+        introduceLetraField.setMaximumSize(new Dimension(150, 20));
+        introduceLetraField.setMinimumSize(new Dimension(150, 20));
+
+        JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+
+        introduceLetraLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        introduceLetraField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        leftPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        leftPanel.add(introduceLetraLabel);
+        leftPanel.add(introduceLetraField);
+
+        this.add(leftPanel, BorderLayout.WEST);
+
+        aceptarLetraButton.setPreferredSize(new Dimension(60, 24));
+        JPanel southPanel = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        southPanel.add(aceptarLetraButton);
+        this.add(southPanel, BorderLayout.SOUTH);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba IntroduceLetraPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new IntroduceLetraPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}
