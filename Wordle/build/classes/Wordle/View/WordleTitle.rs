@@ -1,0 +1,1 @@
+Wordle.View.WordleTitle

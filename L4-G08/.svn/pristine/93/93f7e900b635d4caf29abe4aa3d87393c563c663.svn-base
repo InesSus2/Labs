@@ -1,0 +1,48 @@
+package Ahorcado.controller;
+
+import Ahorcado.model.*;
+import Ahorcado.view.*;
+import java.awt.event.*;
+//import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class AhorcadoController {
+    private AhorcadoModel model;
+    private AhorcadoView view;
+
+    public AhorcadoController(AhorcadoModel model, AhorcadoView view){
+        this.model = model;
+        this.view = view;
+
+        view.addWindowListener(new AhorcadoControllerWindowListener());
+        view.setActionListener(new AhorcadoControllerActionListener());
+
+        ///< Añadir el "listener" del Slider
+    }
+
+    class AhorcadoControllerWindowListener extends WindowAdapter{
+        @Override
+        public void windowClosing(WindowEvent e){
+            System.out.println("AhorcadoController: Cerrar ventana.");
+            System.exit(0);
+        }
+    }
+
+    class AhorcadoControllerActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String command = e.getActionCommand();
+
+            switch(command){
+                // Añadir los casos de los botones
+            }
+        }
+    }
+}

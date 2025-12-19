@@ -18,7 +18,7 @@ public class AhorcadoModel {
 
     public AhorcadoModel() {
         try {
-            imagenFileName = "/Estilos/'Estilo 1'/Fallo0.png";
+            imagenFileName = "/Estilos/Estilo 1/Fallo0.png";
             imagen = ImageIO.read(getClass().getResourceAsStream(imagenFileName));
         }
         catch (IOException | IllegalArgumentException e) {
