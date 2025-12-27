@@ -9,13 +9,12 @@ import Ahorcado.model.AhorcadoModel;
 public class GameCenterPanel extends JPanel{
     private ImagenFallosPanel imagenFallosPanel;
     private LetrasUtilJuegoPanel letrasUtilJuegoPanel;
-    //private String palabraSecreta; /// MIRAR COMO SE PASA LA PALABRA CORRECTA
+    //private String palabraSecreta; /// MIRAR DONDE SE CREA EL ARRAY O STRING CON LAS PALABRAS EN FUNCION DEL TEMA Y COMO SE PASA LA PALABRA CORRECTA
     private AhorcadoModel model;
 
-    public GameCenterPanel(AhorcadoModel model){
+    public GameCenterPanel(String palabraSecreta){
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.model = model;
-        //model = new AhorcadoModel(palabraSecreta); /// MIRAR SI LO QUE HAY QUE PASAR ES LA PALABRA O EL TAMAÑO DE LA PALABRA CON EL TEMA
+        model = new AhorcadoModel(palabraSecreta); /// MIRAR SI LO QUE HAY QUE PASA ES LA PALABRA O EL TAMAÑO DE LA PALABRA CON EL TEMA
         imagenFallosPanel = new ImagenFallosPanel(model);
         letrasUtilJuegoPanel = new LetrasUtilJuegoPanel();
 
@@ -28,9 +27,8 @@ public class GameCenterPanel extends JPanel{
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba GameCenterPanel");
-            AhorcadoModel model = new AhorcadoModel("OSO");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new GameCenterPanel(model));
+            frame.add(new GameCenterPanel());
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
