@@ -22,17 +22,17 @@ public class AhorcadoController {
     private int tamagnoPalabra = 5;
     private String estiloDibujo = "Clásico";
     private int partidas = 0;
-    private String nombreUsu = "";
-    private String colorAdiv = "";
-    private String colorUtil = "";
+    private String colorAdiv = "Rojo";
+    private String colorUtil = "Rojo";
 
     public AhorcadoController(AhorcadoModel model, AhorcadoView view){
         this.model = model;
         this.view = view;
-        
+
         view.addWindowListener(new AhorcadoControllerWindowListener());
         view.setActionListener(new AhorcadoControllerActionListener());
-        view.rankListener(new AhorcadoControllerActionListener());
+
+        ///< Añadir el "listener" del Slider
     }
 
     class AhorcadoControllerWindowListener extends WindowAdapter{
@@ -53,33 +53,28 @@ public class AhorcadoController {
 
             switch(command){
                 case "Salir":
-                    System.out.println("/****************************** AhorcadoController: Salir del juego. ******************************/");
+                    System.out.println("AhorcadoController: Salir del juego.");
                     System.exit(0);
                     break;
                 case "Ranking": // Comando para mostrar el ranking
-                    System.out.println("/****************************** AhorcadoController: Mostrar ranking. ******************************/");
+                    System.out.println("AhorcadoController: Mostrar ranking.");
                     if(partidas != 0) {
                         view.setVector(model.mostrarRanking(),partidas);
                         view.postRanking();
                         view.repaint();
+                        view.rankListener(new AhorcadoControllerActionListener()); //TODO VERIFICAR
                     } else JOptionPane.showMessageDialog(null, 
                         "No hay juegos por mostrar");
                     break;
                 case "Reset": // Comando para reiniciar la configuración de partida
-                    System.out.println("/****************************** AhorcadoController: Reiniciar partida. ******************************/");
-                    
-                    model = null;
-                    
-                    view.resetConfiguracion();
-                    
-                    view.volverAInicio();
+                    System.out.println("AhorcadoController: Reiniciar partida.");
                     break;
                 case "IrAIni":
-                    System.out.println("/****************************** AhorcadoController: Ir a pantalla de inicio. ******************************/");
+                    System.out.println("AhorcadoController: Ir a pantalla de inicio.");
                     view.volverAInicio();
                     break;
                 case "Nosotras":
-                    System.out.println("/****************************** AhorcadoController: Mostrar información sobre nosotras. ******************************/");
+                    System.out.println("AhorcadoController: Mostrar información sobre nosotras.");
                     String res = """
                                  Autoras: Inés Jaso Pernod y Natalia Tauste Rubio
                                  
@@ -99,19 +94,17 @@ public class AhorcadoController {
                     JOptionPane.showMessageDialog(null, res);
                     break;
                 case "ColoresLetrasAdiv":
-                    System.out.println("/****************************** AhorcadoController: Cambiar colores de letras adivinadas. ******************************/");
+                    System.out.println("AhorcadoController: Cambiar colores de letras adivinadas.");
                     colorAdiv = view.getColorLetrasAdiv();
                     break;
                 case "ColoresLetrasUtil":
-                    System.out.println("/****************************** AhorcadoController: Cambiar colores de letras utilizadas. ******************************/");
+                    System.out.println("AhorcadoController: Cambiar colores de letras utilizadas.");
                     colorUtil = view.getColorLetrasUtil();
                     break;
                 case "ComenzarPartida":
-                    System.out.println("/****************************** AhorcadoController: Comenzar partida. ******************************/");
+                    System.out.println("AhorcadoController: Comenzar partida.");
                     tamagnoPalabra = view.getSlider();
                     String palabra = null;
-                    nombreUsu = view.getNombreUsu();
-                    partidas++;
 
                     if ("Animales".equals(temaPalabra)) {
                         if (tamagnoPalabra == 3) palabra = animales[0];
@@ -143,7 +136,7 @@ public class AhorcadoController {
                     view.setActionListener(this);
                     break;
                 case "EstilosDibujo":
-                    System.out.println("/****************************** AhorcadoController: Cambiar estilo de dibujo. ******************************/");
+                    System.out.println("AhorcadoController: Cambiar estilo de dibujo.");
                     if (view.getEstiloDibujo().equals("Clásico")){
                         estiloDibujo = "Estilo1";
                     }
@@ -155,7 +148,7 @@ public class AhorcadoController {
                     }
                     break;
                 case "TemasPalabra":
-                    System.out.println("/****************************** AhorcadoController: Cambiar tema de palabra. ******************************/");
+                    System.out.println("AhorcadoController: Cambiar tema de palabra.");
                     if (view.getTemaPalabra().equals("Animales")){
                         temaPalabra = "Animales";
                     }
@@ -167,9 +160,8 @@ public class AhorcadoController {
                     }
                     break;
                 case "AceptarLetra":
-                    System.out.println("/****************************** AhorcadoController: Letra a aceptar. ******************************/");
+                    System.out.println("AhorcadoController: Letra a aceptar.");
                     char letra = view.getLetraIntroducida();
-                    view.resetTextField();
                     boolean acierto = false;
 
                     // Probar la letra según el estilo de dibujo
@@ -191,12 +183,12 @@ public class AhorcadoController {
                     }
                     break;
                 case "OkRanking":
-                    System.out.println("/****************************** AhorcadoController: Cerrar ranking. ******************************/");
+                    System.out.println("AhorcadoController: Cerrar ranking.");
                     view.closeRanking(); // Vuelve a la pantalla principal
                     view.repaint();
                     break;
                 default:
-                    System.out.println("AhorcadoController: Comando no reconocido. ******************************/");
+                    System.out.println("AhorcadoController: Comando no reconocido.");
                     break;
             }
         }

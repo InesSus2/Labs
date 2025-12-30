@@ -1,5 +1,6 @@
 package Ahorcado.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -21,6 +22,8 @@ public class AhorcadoView extends JFrame {
     private ConfiguracionPanel configuracionPanel;
     private RankingPanel rank;
     private JuegoPanel juegoPanel;
+    private ColorLetrasAdivPanel colorLetrasAdivPanel;
+    private ColorLetrasUtilPanel colorLetrasUtilPanel;
     private Persona[] p = new Persona[10];
     private int num_personas = 0;
 
@@ -44,6 +47,15 @@ public class AhorcadoView extends JFrame {
         getContentPane().add(panel);
         revalidate();
         repaint();
+    }
+
+    public void setActionListener(ActionListener al){
+        menu.setActionListener(al);
+        configuracionPanel.setActionListener(al);
+
+        if (juegoPanel != null) {
+            juegoPanel.setActionListener(al);
+        }
     }
 
     /**
@@ -118,11 +130,11 @@ public class AhorcadoView extends JFrame {
     }
 
     public String getColorLetrasAdiv() {
-        return configuracionPanel.getColorLetrasAdiv();
+        return colorLetrasAdivPanel.getColorLetrasAdiv();
     }
 
     public String getColorLetrasUtil() {
-        return configuracionPanel.getColorLetrasUtil();
+        return colorLetrasUtilPanel.getColorLetrasUtil();
     }
 
     public char getLetraIntroducida() {
@@ -133,10 +145,6 @@ public class AhorcadoView extends JFrame {
         return configuracionPanel.getSlider();
     }
 
-    public String getNombreUsu() {
-        return configuracionPanel.getNombreUsu();
-    }
-
     /**
      * Asigna el vector del model a el view
      * @param p_vec vector de personas en el model
@@ -145,6 +153,10 @@ public class AhorcadoView extends JFrame {
     public void setVector(Persona[] p_vec,int personas){
         this.num_personas = personas;
         this.p = p_vec;
+    }
+
+    public void rankListener(ActionListener al){ //TODO VERIFICAR
+        rank.setActionListener(al);
     }
 
     public void mostrarLetra(char letra, String color) {
@@ -171,27 +183,6 @@ public class AhorcadoView extends JFrame {
             default:
                 return Color.BLACK;
         }
-    }
-
-    public void resetTextField(){
-        juegoPanel.resetTextField();
-    }
-
-    public void resetConfiguracion() {
-        configuracionPanel.reset();
-    }
-
-    public void setActionListener(ActionListener al){
-        menu.setActionListener(al);
-        configuracionPanel.setActionListener(al);
-
-        if (juegoPanel != null) {
-            juegoPanel.setActionListener(al);
-        }
-    }
-    
-    public void rankListener(ActionListener al){ //TODO VERIFICAR
-        rank.setActionListener(al);
     }
 
     public static void main(String[] args) {
