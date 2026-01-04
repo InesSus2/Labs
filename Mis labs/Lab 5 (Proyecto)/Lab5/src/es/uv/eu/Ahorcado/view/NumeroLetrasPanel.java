@@ -1,7 +1,7 @@
 package Ahorcado.view;
 
+import java.awt.Color;
 import java.awt.Component;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,12 +9,20 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
 public class NumeroLetrasPanel extends JPanel {
     private JLabel texto;
     private JSlider slider;
 
     public NumeroLetrasPanel(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
+
         texto = new JLabel ("NÚMERO DE LETRAS:");
         slider = new JSlider(3, 8, 5);
         slider.setPaintTicks(true);
@@ -31,6 +39,10 @@ public class NumeroLetrasPanel extends JPanel {
 
     public int getSlider() {
         return slider.getValue();
+    }
+
+    public void setValue(int value) {
+        slider.setValue(value);
     }
 
     public static void main(String[] args) {

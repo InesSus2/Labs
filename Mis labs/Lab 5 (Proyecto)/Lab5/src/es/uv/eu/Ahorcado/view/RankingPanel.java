@@ -1,0 +1,102 @@
+package Ahorcado.view;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import Ahorcado.model.AhorcadoModel.Persona;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
+public class RankingPanel extends JPanel{
+    private Persona[] p;
+    private JPanel panelNorte;
+    private JLabel[] nombre = new JLabel[10];
+    private JLabel[] intentos = new JLabel[10];
+    private JLabel[] ganador = new JLabel[10];
+    private JPanel[] panelCentro = new JPanel[10];
+    private JPanel panelPersona;
+    private JButton ok;
+
+    public RankingPanel(Persona[] p_vec, int personas){
+        this.setLayout(new BorderLayout());
+        p = new Persona[personas];
+        this.p = p_vec;
+        
+        ok = new JButton("OK");
+        ok.setActionCommand("OkRanking"); // Se pone el action command para el boton de ok dentro del ranking
+        ok.setFont(new Font("SANS_SERIF", 3, 30));
+        //ok.setBackground(Color.RED);
+        //ok.setForeground(Color.WHITE);
+        
+        panelPersona = new JPanel();
+        panelPersona.setLayout(new GridLayout(personas, 1, 1, 1));
+        
+        panelNorte = new JPanel();
+        panelNorte.setLayout(new GridLayout(1, 3, 1, 1));
+        
+        JLabel aux1 = new JLabel("Nombre");
+        aux1.setFont(new Font("SANS_SERIF", 3, 20));
+        
+        JLabel aux2 = new JLabel("Intentos");
+        aux2.setFont(new Font("SANS_SERIF", 3, 20));
+        
+        JLabel aux3 = new JLabel("Ganador/Perdedor");
+        aux3.setFont(new Font("SANS_SERIF", 3, 15));
+
+        panelNorte.add(aux1); //Panel de "Nombre"
+        panelNorte.add(aux2); //Panel de "Intentos"
+        panelNorte.add(aux3); //Panel de "Ganador/Perdedor"
+
+        panelNorte.setBorder(new EtchedBorder(1));
+        panelNorte.setBackground(new Color(104, 171, 99));
+        
+        this.add(panelNorte, BorderLayout.NORTH);
+        
+        int i = 0;
+        do {
+            panelCentro[i] = new JPanel();
+            panelCentro[i].setLayout(new GridLayout(1, 3, 1, 1));
+
+            nombre[i] = new JLabel(p[i].getNombre());
+            nombre[i].setFont(new Font("SANS_SERIF", 3, 25));
+            nombre[i].setBorder(new EtchedBorder(1));
+            
+            intentos[i] = new JLabel(p[i].getIntentos() + "");
+            intentos[i].setBorder(new EtchedBorder(1));
+            intentos[i].setFont(new Font("SANS_SERIF", 3, 25));
+            
+            if (p[i].getGanar() == 1) { //Si es 1 es ganador
+                ganador[i] = new JLabel("Ganador");
+            } else { // si no es perdedor
+                ganador[i] = new JLabel("Perdedor");
+            }
+
+            ganador[i].setBorder(new EtchedBorder(1));
+            ganador[i].setFont(new Font("SANS_SERIF", 3, 25));
+            
+            panelCentro[i].add(nombre[i]);
+            panelCentro[i].add(intentos[i]);
+            panelCentro[i].add(ganador[i]);
+            panelCentro[i].setBorder(new EtchedBorder(1));
+            
+            panelPersona.add(panelCentro[i]);
+            
+            i++;
+        } while (i < personas); ///DO-WHILE
+
+        this.add(panelPersona, BorderLayout.CENTER);
+        this.add(ok, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Listeners para el boton OK de ranking
+     * @param al 
+     */
+    public void setActionListener(ActionListener al) {
+        ok.addActionListener(al);
+    }
+}

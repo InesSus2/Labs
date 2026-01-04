@@ -52,20 +52,6 @@ public class PalabrasAdivJuegoPanel extends JPanel {
         return palabraAdivinada;
     }
 
-    //TODO Hacer un método para modificar la visualización de la palabra por adivinar. La letra debe ir apareciendo en su posición correspondiente manteniendo las demás letras ocultas con guiones bajos.
-    public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
-        letraProbada = Character.toUpperCase(letraProbada);
-        palabraPorAdivinar = palabraPorAdivinar.toUpperCase();
-
-        for (int i = 0; i < palabraPorAdivinar.length(); i++) {
-            // Si la letra probada coincide con la letra real
-            if (palabraPorAdivinar.charAt(i) == letraProbada) {
-                setLetra(i, letraProbada);
-            letrasLabels.get(i).setForeground(colorLetra);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba PalabrasAdivJuegoPanel");

@@ -1,17 +1,25 @@
 package Ahorcado.view;
 
-//import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
 
 public class ColorLetrasPanel extends JPanel{
     private ColorLetrasAdivPanel colorLetrasAdivPanel;
     private ColorLetrasUtilPanel colorLetrasUtilPanel;
 
     public ColorLetrasPanel() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
         colorLetrasAdivPanel = new ColorLetrasAdivPanel();
         colorLetrasUtilPanel = new ColorLetrasUtilPanel();
 
@@ -21,12 +29,23 @@ public class ColorLetrasPanel extends JPanel{
         this.setVisible(true);
     }
 
-    /*
-    public void setActionListener(ActionListener actionListener){
-        CBColoresLetrasAdiv.addActionListener(actionListener);
-        CBColoresLetrasUtil.addActionListener(actionListener);
+    public String getColorLetrasAdiv() {
+        return colorLetrasAdivPanel.getColorLetrasAdiv();
     }
-    */
+
+    public String getColorLetrasUtil() {
+        return colorLetrasUtilPanel.getColorLetrasUtil();
+    }
+
+    public void reset(int index) {
+        colorLetrasAdivPanel.setSelectedIndex(index);
+        colorLetrasUtilPanel.setSelectedIndex(index);
+    }
+
+    public void setActionListener(ActionListener actionListener){
+        colorLetrasAdivPanel.setActionListener(actionListener);
+        colorLetrasUtilPanel.setActionListener(actionListener);
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

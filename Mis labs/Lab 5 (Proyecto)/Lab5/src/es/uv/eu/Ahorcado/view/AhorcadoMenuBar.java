@@ -14,32 +14,42 @@ import java.awt.event.ActionListener;
  */
 
 public class AhorcadoMenuBar extends JMenuBar{
-    private JMenu archivo;
+    private JMenu menu;
     private JMenuItem ranking;
-    private JMenuItem nuevaPartida;
+    private JMenuItem reset;
+    private JMenuItem inicio;
+    private JMenuItem nosotras;
     private JMenuItem salir;
 
     public AhorcadoMenuBar() {
-        archivo = new JMenu("Archivo");
+        menu = new JMenu("Menu");
         ranking = new JMenuItem("Ranking");
-        nuevaPartida = new JMenuItem("Nueva partida");
-        salir = new JMenuItem("Salir");
+        reset = new JMenuItem("Resetear");
+        inicio = new JMenuItem("Ir a inicio");
+        nosotras = new JMenuItem("Sobre Nosotras");
+        salir = new JMenuItem("Salir de la aplicación");
 
         ranking.setActionCommand("Ranking");
-        nuevaPartida.setActionCommand("NuevaPartida");
+        reset.setActionCommand("Reset");
+        inicio.setActionCommand("IrAIni");
+        nosotras.setActionCommand("Nosotras");
         salir.setActionCommand("Salir");
 
-        archivo.add(ranking);
-        archivo.add(nuevaPartida);
-        archivo.add(salir);
-        this.add(archivo);
+        menu.add(ranking);
+        menu.add(reset);
+        menu.add(inicio);
+        menu.add(nosotras);
+        menu.add(salir);
+        this.add(menu);
 
         this.setVisible(true);
     }
 
     public void setActionListener(ActionListener actionListener){
         ranking.addActionListener(actionListener);
-        nuevaPartida.addActionListener(actionListener);
+        reset.addActionListener(actionListener);
+        inicio.addActionListener(actionListener);
+        nosotras.addActionListener(actionListener);
         salir.addActionListener(actionListener);
     }
 

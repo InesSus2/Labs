@@ -155,18 +155,12 @@ public class AhorcadoView extends JFrame {
         this.p = p_vec;
     }
 
-    public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
-        juegoPanel.actualizarPalabraAdivinada(palabraPorAdivinar, letraProbada, colorLetra);
-    }
-
-    /*
     public void mostrarLetra(char letra, String color) {
         if (juegoPanel == null) return;
 
         Color c = convertirColor(color);
         juegoPanel.mostrarLetra(letra, c);
     }
-    */
 
     public Color convertirColor(String color) {
         if (color == null) return Color.BLACK;

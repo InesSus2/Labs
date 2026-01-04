@@ -6,9 +6,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
 
 public class TemaPalabraPanel extends JPanel {
     private JLabel texto;
@@ -17,6 +24,8 @@ public class TemaPalabraPanel extends JPanel {
 
     public TemaPalabraPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
+            
         texto = new JLabel("TEMA DE LA PALABRA:");
         CBTemasPalabra = new JComboBox<>(temas);
         CBTemasPalabra.setMaximumSize(new Dimension(150, 20));
@@ -30,11 +39,13 @@ public class TemaPalabraPanel extends JPanel {
         this.add(CBTemasPalabra);
     }
 
-    /*
-    public JComboBox<String> getComboBox() {
-        return CBTemasPalabra;
+    public String getTemaPalabra() {
+        return (String) CBTemasPalabra.getSelectedItem();
     }
-    */
+
+    public void setSelectedItem(String string) {
+        CBTemasPalabra.setSelectedItem(string);
+    }
 
     public void setActionListener(ActionListener actionListener){
         CBTemasPalabra.addActionListener(actionListener);

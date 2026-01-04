@@ -1,7 +1,10 @@
 package Ahorcado.view;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -9,25 +12,43 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
 public class ColorLetrasUtilPanel extends JPanel{
     private JLabel coloresUtil;
     private JComboBox<String> CBColoresLetrasUtil;
-    private String[] colores = {"Rojo", "Azul", "Verde", "Amarillo", "Naranja", "Rosa", "Negro", "Blanco"};
+    private String[] colores = {"🟥 Rojo", "🟦 Azul", "🟩 Verde", "🟨 Amarillo", "🟧 Naranja"};
 
     public ColorLetrasUtilPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        coloresUtil = new JLabel("COLOR DE LAS LETRAS ADIVINADAS:");
+        this.setBackground(Color.WHITE);
+        coloresUtil = new JLabel("COLOR LETRAS UTILIZADAS:");
         CBColoresLetrasUtil = new JComboBox<>(colores);
-        CBColoresLetrasUtil.setActionCommand("ColoresLetrasUtil"); ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
+        CBColoresLetrasUtil.setActionCommand("ColoresLetrasUtil");
 
         coloresUtil.setAlignmentX(Component.CENTER_ALIGNMENT);
         CBColoresLetrasUtil.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        CBColoresLetrasUtil.setMaximumSize(new Dimension(200, 50));
+
         this.add(coloresUtil);
+        this.add(Box.createVerticalStrut(1));
         this.add(CBColoresLetrasUtil);
     }
 
-    public void setActionListener(ActionListener actionListener){ ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
+    public String getColorLetrasUtil() {
+        return (String) CBColoresLetrasUtil.getSelectedItem();
+    }
+
+    public void setSelectedIndex(int index) {
+        CBColoresLetrasUtil.setSelectedIndex(index);
+    }
+
+    public void setActionListener(ActionListener actionListener){
         CBColoresLetrasUtil.addActionListener(actionListener);
     }
 

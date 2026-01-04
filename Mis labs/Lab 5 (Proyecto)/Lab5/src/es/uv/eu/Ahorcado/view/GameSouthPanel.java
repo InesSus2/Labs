@@ -58,10 +58,6 @@ public class GameSouthPanel extends JPanel{
         introduceLetraPanel.resetTextField();
     }
 
-    public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
-        palabrasAdivJuegoPanel.actualizarPalabraAdivinada(palabraPorAdivinar, letraProbada, colorLetra);
-    }
-
     public void setActionListener(ActionListener listener){
         introduceLetraPanel.setActionListener(listener);
     }

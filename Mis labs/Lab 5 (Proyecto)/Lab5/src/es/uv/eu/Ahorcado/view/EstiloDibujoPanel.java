@@ -1,6 +1,7 @@
 package Ahorcado.view;
 
 import javax.swing.BoxLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -10,13 +11,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
 public class EstiloDibujoPanel extends JPanel{
     private JLabel texto;
     private JComboBox<String> CBEstiloDibujo;
-    private String[] estilos = {"Etilo 1", "Estilo 2", "Estilo 3"};
+    private String[] estilos = {"Clásico", "Peluche", "Hello Kitty"};
 
     public EstiloDibujoPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
+        
         texto = new JLabel("ESTILO DEL DIBUJO:");
         CBEstiloDibujo = new JComboBox<>(estilos);
         CBEstiloDibujo.setMaximumSize(new Dimension(150, 20));
@@ -32,8 +41,16 @@ public class EstiloDibujoPanel extends JPanel{
         this.setVisible(true);
     }
 
+    public String getEstiloDibujo() {
+        return (String) CBEstiloDibujo.getSelectedItem();
+    }
+
     public void setActionListener(ActionListener actionListener){
         CBEstiloDibujo.addActionListener(actionListener);
+    }
+
+    public void setSelectedItem(String string) {
+        CBEstiloDibujo.setSelectedItem(string);
     }
 
     public static void main(String[] args) {

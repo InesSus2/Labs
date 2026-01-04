@@ -1,7 +1,10 @@
 package Ahorcado.view;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -9,27 +12,47 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
 public class ColorLetrasAdivPanel extends JPanel{
     private JLabel coloresAdiv;
     private JComboBox<String> CBColoresLetrasAdiv;
-    private String[] colores = {"Rojo", "Azul", "Verde", "Amarillo", "Naranja", "Rosa", "Negro", "Blanco"};
+    private String[] colores = {"🟥 Rojo", "🟦 Azul", "🟩 Verde", "🟨 Amarillo", "🟧 Naranja"};
 
     public ColorLetrasAdivPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        coloresAdiv = new JLabel("COLOR DE LAS LETRAS ADIVINADAS:");
+        this.setBackground(Color.WHITE);
+
+        coloresAdiv = new JLabel("COLOR LETRAS ADIVINADAS:");
         CBColoresLetrasAdiv = new JComboBox<>(colores);
-        CBColoresLetrasAdiv.setActionCommand("ColoresLetrasAdiv"); ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
+        CBColoresLetrasAdiv.setActionCommand("ColoresLetrasAdiv");
 
         coloresAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
         CBColoresLetrasAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        CBColoresLetrasAdiv.setMaximumSize(new Dimension(200, 50));
+
         this.add(coloresAdiv);
+        this.add(Box.createVerticalStrut(1));
         this.add(CBColoresLetrasAdiv);
     }
 
-    public void setActionListener(ActionListener actionListener){ ///< NO ESTOY SEGURA DE SI VA AQUÍ O EN ColorLetrasPanel
+    public String getColorLetrasAdiv() {
+        return (String) CBColoresLetrasAdiv.getSelectedItem();
+    }
+
+    public void setSelectedIndex(int index/*String string*/) {
+        CBColoresLetrasAdiv.setSelectedIndex(index);
+    }
+
+    public void setActionListener (ActionListener actionListener){
         CBColoresLetrasAdiv.addActionListener(actionListener);
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -37,7 +60,6 @@ public class ColorLetrasAdivPanel extends JPanel{
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(600, 600);
             frame.add(new ColorLetrasAdivPanel());
-            
             frame.setVisible(true);
         });
     }
