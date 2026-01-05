@@ -1,0 +1,73 @@
+package Ahorcado.view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import Ahorcado.model.AhorcadoModel;
+
+public class JuegoPanel extends JPanel{
+    //private AhorcadoMenuBar menu;
+    private GameCenterPanel gameCenterPanel;
+    private GameSouthPanel gameSouthPanel;
+    //private AhorcadoModel model;
+
+    public JuegoPanel(AhorcadoModel model, int tamPalabra){
+        this.setLayout(new BorderLayout());
+        //this.model = model;
+        gameCenterPanel = new GameCenterPanel(model);
+        gameSouthPanel = new GameSouthPanel(tamPalabra);
+        this.add(gameCenterPanel, BorderLayout.CENTER);
+        this.add(gameSouthPanel, BorderLayout.SOUTH);
+
+        this.setVisible(true);
+    }
+
+    public char getLetraIntroducida() {
+        return gameSouthPanel.getLetraIntroducida();
+    }
+
+    public void mostrarLetra(char letra, Color c) {
+        gameCenterPanel.mostrarLetra(letra, c);
+        gameSouthPanel.mostrarLetra(letra, c);
+    }
+
+    public void resetTextField(){
+        gameSouthPanel.resetTextField();
+    }
+
+    public void setPuntuacionUsuLabel(int puntuacion) {
+        gameCenterPanel.setPuntuacionUsuLabel(puntuacion);
+    }
+
+    public void appendTextArea(char letra, Color color, int fallos) {
+        gameCenterPanel.appendTextArea(letra, color, fallos);
+    }
+
+    public void actualizarImagenAhorcado() {
+        if (gameCenterPanel != null) {
+            gameCenterPanel.actualizarImagenAhorcado();
+        }
+    }
+
+    public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
+        gameSouthPanel.actualizarPalabraAdivinada(palabraPorAdivinar, letraProbada, colorLetra);
+    }
+
+    public void setActionListener(ActionListener listener){
+        gameSouthPanel.setActionListener(listener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba JuegoPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1200, 800);
+            frame.add(new JuegoPanel(new AhorcadoModel("OSO"), 3));
+            
+            frame.setVisible(true);
+        });
+    }
+}

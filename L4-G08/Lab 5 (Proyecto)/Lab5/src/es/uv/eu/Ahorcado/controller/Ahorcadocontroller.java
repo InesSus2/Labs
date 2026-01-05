@@ -1,8 +1,9 @@
-package Ahorcado.controller;
+package es.uv.eu.Ahorcado.controller;
 
-import Ahorcado.model.*;
-import Ahorcado.model.AhorcadoModel.Persona;
-import Ahorcado.view.*;
+
+import es.uv.eu.Ahorcado.view.*;
+import es.uv.eu.Ahorcado.model.AhorcadoModel;
+//import es.uv.eu.Ahorcado.view.AhorcadoView;
 import java.awt.Color;
 //import java.awt.event.ActionListener;
 import java.awt.event.*;
@@ -26,11 +27,13 @@ public class AhorcadoController {
     private int puntuacion = 0;
     private int fallos = 0;
     private String nombreUsu = "";
-    private String colorAdiv = "🟥 Rojo";
-    private String colorUtil = "🟥 Rojo";
+    private String colorAdiv = "Rojo";
+    private String colorUtil = "Rojo";
     private Color letraAdivinada;
     private Color letraUtilizada;
     private boolean acierto;
+    private final ActionListener al = new AhorcadoControllerActionListener();
+
     //private Persona[] p = new Persona[10];
 
     public AhorcadoController(AhorcadoModel model, AhorcadoView view){
@@ -41,6 +44,8 @@ public class AhorcadoController {
         view.addWindowListener(new AhorcadoControllerWindowListener());
         view.setActionListener(new AhorcadoControllerActionListener());
         view.rankListener(new AhorcadoControllerActionListener());
+        view.setActionListener(al);
+
     }
 
     class AhorcadoControllerWindowListener extends WindowAdapter{
@@ -68,13 +73,13 @@ public class AhorcadoController {
                 case "Ranking": // Comando para mostrar el ranking
                     System.out.println("/****************************** AhorcadoController: Mostrar ranking. ******************************/");
                     if(partidas != 0) {
-                        view.setVector(model.mostrarRanking(),partidas);
+                        //view.setVector(model.mostrarRanking(),partidas);
                         view.postRanking();
                         view.repaint();
                     } else JOptionPane.showMessageDialog(null, 
                         "No hay juegos por mostrar");
                     break;
-                case "Reset": // Comando para reiniciar la configuración de partida
+                case "Reset": //Comando para reiniciar la configuración de partida
                     System.out.println("/****************************** AhorcadoController: Reiniciar partida. ******************************/");
                     
                     model = null;
@@ -148,7 +153,7 @@ public class AhorcadoController {
 
                     model = new AhorcadoModel(palabra);
 
-                    /* 1️⃣ Asignar estilo ANTES de mostrar la vista */
+                    // Asignar estilo ANTES de mostrar la vista */
                     String estiloSeleccionado = view.getEstiloDibujo();
 
                     if (estiloSeleccionado.equals("Clásico")) {
@@ -170,7 +175,9 @@ public class AhorcadoController {
 
                     /* 3️⃣ Mostrar panel de juego */
                     view.postJuegoPanel(model, tamagnoPalabra);
-                    //view.setActionListener(this);
+                    
+                    view.actualizarImagenJuego(); //pinta la imagen actual (fallos=0) del estilo elegido
+
                     break;
                 case "EstilosDibujo":
                     System.out.println("/****************************** AhorcadoController: Cambiar estilo de dibujo. ******************************/");
@@ -214,29 +221,46 @@ public class AhorcadoController {
                     break;
                 case "AceptarLetra":
                     System.out.println("/****************************** AhorcadoController: Letra a aceptar. ******************************/");
-                    char letra = view.getLetraIntroducida();
-                    System.out.println("/****************************** La letra introducida es: " + letra + " ******************************/");
+                    String letra = view.getTextoIntroducido();
+                    //If para ver si es una letra lo añadido
+                    String txt = String.valueOf(letra);
+                   if (letra.length() != 1 || !Character.isLetter(letra.charAt(0))) {
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Entrada incorrecta",
+                            "Error",
+                            JOptionPane.WARNING_MESSAGE
+                        );
+                        view.resetTextField();
+                        break;
+                    }
+
+                   char letraChar = Character.toUpperCase(letra.charAt(0));
+                    System.out.println("/****************************** La letra introducida es: " + letraChar + " ******************************/");
                     view.resetTextField();
 
                     System.out.println("/****************************** El estilo del dibujo es: " + estiloDibujo + " ******************************/");
                     
                     // Probar la letra según el estilo de dibujo
                     if(estiloDibujo.equals("Estilo1")){
-                        acierto = model.probarLetraEstilo1(letra);
+                        acierto = model.probarLetraEstilo1(letraChar);
                         puntuacion = model.getPuntuacion();
                         view.setPuntuacionUsuLabel(puntuacion);
                         letraAdivinada = view.convertirColor(colorAdiv);
                         letraUtilizada = view.convertirColor(colorUtil);
                         
-                        // SOLUCIÓN DIRECTA: Forzar repintado de la ventana
+                        //Forzar repintado de la ventana
                         view.repaint();
                         
                         if(acierto == true){
-                            //view.actualizarPalabraAdivinada(palabra, letra, letraAdivinada);
+                            view.actualizarPalabraAdivinada(palabra, letraChar, letraAdivinada);
+                            view.appendTextArea(letraChar, letraUtilizada, fallos);
+                            view.actualizarImagenJuego();
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
+                            
                         } else {
-                            fallos++;
-                            view.appendTextArea(letra, letraUtilizada, fallos);
+                            fallos = model.getFallos();
+                            view.appendTextArea(letraChar, letraUtilizada, fallos);
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                             if(fallos == 5){
                                 System.out.println("/****************************** La palabra era: " + palabra + " ******************************/");
@@ -252,21 +276,24 @@ public class AhorcadoController {
                         }
                     }
                     else if(estiloDibujo.equals("Estilo2")){
-                        acierto = model.probarLetraEstilo2(letra);
+                        acierto = model.probarLetraEstilo2(letraChar);
                         puntuacion = model.getPuntuacion();
                         view.setPuntuacionUsuLabel(puntuacion);
                         letraAdivinada = view.convertirColor(colorAdiv);
                         letraUtilizada = view.convertirColor(colorUtil);
                         
-                        // SOLUCIÓN DIRECTA: Forzar repintado de la ventana
+                        //Forzar repintado de la ventana
                         view.repaint();
                         
                         if(acierto == true){
-                            //view.actualizarPalabraAdivinada(palabra, letra, letraAdivinada);
+                            view.actualizarPalabraAdivinada(palabra, letraChar, letraAdivinada);
+                            view.appendTextArea(letraChar, letraUtilizada, fallos);
+                            view.actualizarImagenJuego();
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                         } else {
-                            fallos++;
-                            view.appendTextArea(letra, letraUtilizada, fallos);
+                            //fallos++;
+                            fallos = model.getFallos();
+                            view.appendTextArea(letraChar, letraUtilizada, fallos);
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                             if(fallos == 5){
                                 System.out.println("/****************************** La palabra era: " + palabra + " ******************************/");
@@ -283,7 +310,7 @@ public class AhorcadoController {
                         System.out.println("/****************************** La puntuacion es: " + puntuacion + " ******************************/");
                     }
                     else if(estiloDibujo.equals("Estilo3")){
-                        acierto = model.probarLetraEstilo3(letra);
+                        acierto = model.probarLetraEstilo3(letraChar);
                         puntuacion = model.getPuntuacion();
                         view.setPuntuacionUsuLabel(puntuacion);
                         letraAdivinada = view.convertirColor(colorAdiv);
@@ -293,11 +320,14 @@ public class AhorcadoController {
                         view.repaint();
                         
                         if(acierto == true){
-                            //view.actualizarPalabraAdivinada(palabra, letra, letraAdivinada);
+                            view.actualizarPalabraAdivinada(palabra, letraChar, letraAdivinada);
+                            view.appendTextArea(letraChar, letraUtilizada, fallos);
+                            view.actualizarImagenJuego();
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                         } else {
-                            fallos++;
-                            view.appendTextArea(letra, letraUtilizada, fallos);
+                            //fallos++;
+                            fallos = model.getFallos();
+                            view.appendTextArea(letraChar, letraUtilizada, fallos);
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                             if(fallos == 5){
                                 System.out.println("/****************************** La palabra era: " + palabra + " ******************************/");
@@ -311,8 +341,17 @@ public class AhorcadoController {
                                 //model.p.agregarRanking(0, puntuacion);
                             }
                         }
+                        
                     }
+                    if (model.palabraCompletada()) {
+                            JOptionPane.showMessageDialog(null, "¡Has acertado!");
+                            // (opcional) guardar ranking aquí si quieres
+                            // model.agregarRanking(1, puntuacion);  // o lo que uséis
+                            view.volverAInicio();
+                            break;
+                        }
                     break;
+
                 case "OkRanking":
                     System.out.println("/****************************** AhorcadoController: Cerrar ranking. ******************************/");
                     view.closeRanking(); // Vuelve a la pantalla principal

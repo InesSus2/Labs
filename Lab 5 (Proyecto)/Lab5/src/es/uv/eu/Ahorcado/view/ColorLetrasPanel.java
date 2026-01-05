@@ -1,0 +1,60 @@
+package Ahorcado.view;
+
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class ColorLetrasPanel extends JPanel{
+    private ColorLetrasAdivPanel colorLetrasAdivPanel;
+    private ColorLetrasUtilPanel colorLetrasUtilPanel;
+
+    public ColorLetrasPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
+        colorLetrasAdivPanel = new ColorLetrasAdivPanel();
+        colorLetrasUtilPanel = new ColorLetrasUtilPanel();
+
+        this.add(colorLetrasAdivPanel);
+        this.add(colorLetrasUtilPanel);
+
+        this.setVisible(true);
+    }
+
+    public String getColorLetrasAdiv() {
+        return colorLetrasAdivPanel.getColorLetrasAdiv();
+    }
+
+    public String getColorLetrasUtil() {
+        return colorLetrasUtilPanel.getColorLetrasUtil();
+    }
+
+    public void reset(int index) {
+        colorLetrasAdivPanel.setSelectedIndex(index);
+        colorLetrasUtilPanel.setSelectedIndex(index);
+    }
+
+    public void setActionListener(ActionListener actionListener){
+        colorLetrasAdivPanel.setActionListener(actionListener);
+        colorLetrasUtilPanel.setActionListener(actionListener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba ColorLetrasPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new ColorLetrasPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}

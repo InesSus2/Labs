@@ -1,0 +1,105 @@
+package Ahorcado.view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ */
+
+public class ConfiguracionPanel extends JPanel{
+    private NombreUsuPanel nombreUsuPanel;
+    private NumeroLetrasPanel numeroLetrasPanel;
+    private TemaPalabraPanel temaPalabraPanel;
+    private EstiloDibujoPanel estiloDibujoPanel;
+    private ColorLetrasPanel colorLetrasPanel;
+    private JButton comenzar;
+
+    public ConfiguracionPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(Color.WHITE);
+
+        nombreUsuPanel = new NombreUsuPanel();
+        numeroLetrasPanel = new NumeroLetrasPanel();
+        temaPalabraPanel = new TemaPalabraPanel();
+        estiloDibujoPanel = new EstiloDibujoPanel();
+        colorLetrasPanel = new ColorLetrasPanel();
+        comenzar = new JButton("COMENZAR PARTIDA");
+        comenzar.setActionCommand("ComenzarPartida");
+        comenzar.setAlignmentX(CENTER_ALIGNMENT);
+
+        this.add(nombreUsuPanel);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(numeroLetrasPanel);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(temaPalabraPanel);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(estiloDibujoPanel);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(colorLetrasPanel);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(comenzar);
+
+        this.setVisible(true);
+    }
+
+    public String getTemaPalabra() {
+        return temaPalabraPanel.getTemaPalabra();
+    }
+
+    public String getEstiloDibujo() {
+        return estiloDibujoPanel.getEstiloDibujo();
+    }
+
+    public int getSlider() {
+        return numeroLetrasPanel.getSlider();
+    }
+
+    public String getNombreUsu() {
+        return nombreUsuPanel.getNombreUsu();
+    }
+
+    public String getColorLetrasAdiv() {
+        return colorLetrasPanel.getColorLetrasAdiv();
+    }
+
+    public String getColorLetrasUtil() {
+        return colorLetrasPanel.getColorLetrasUtil();
+    }
+
+    public void reset() {
+        nombreUsuPanel.resetNombreUsu();
+        numeroLetrasPanel.setValue(5);
+        temaPalabraPanel.setSelectedItem("Animales");
+        estiloDibujoPanel.setSelectedItem("Clásico");
+        colorLetrasPanel.reset(0);
+    }
+
+    public void setActionListener(ActionListener actionListener){
+        ///numeroLetrasPanel.setActionListener(actionListener); ///< TIENE EL METODO getValue()
+        temaPalabraPanel.setActionListener(actionListener);
+        estiloDibujoPanel.setActionListener(actionListener);
+        colorLetrasPanel.setActionListener(actionListener);
+        comenzar.addActionListener(actionListener);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba ConfiguracionPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.add(new ConfiguracionPanel());
+            
+            frame.setVisible(true);
+        });
+    }
+}
