@@ -1,21 +1,24 @@
-package lab5;
+package es.uv.eu.lab5;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
-import Ahorcado.controller.AhorcadoController;
-import Ahorcado.model.AhorcadoModel;
-import Ahorcado.view.AhorcadoView;
+import es.uv.eu.Ahorcado.controller.AhorcadoController;
+import es.uv.eu.Ahorcado.model.AhorcadoModel;
+import es.uv.eu.Ahorcado.view.AhorcadoView;
 
-/**
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
+
 public class Lab5 {
-    /**
+    /***************************** main() ********************************
+     * @brief Funcon principal del programa
+     * 
      * @param args the command line arguments
-     */
+     ********************************************************************/
     public static void main(String[] args) {
         // TODO code application logic here
         AhorcadoModel model = new AhorcadoModel();

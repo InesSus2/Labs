@@ -1,20 +1,32 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
+
 public class TituloPanel extends JPanel {
-    ///PANEL PARA PONER LA IMAGEN CON EL TITULO DEL JUEGO
     private JLabel titulo;
     public TituloPanel() {
-        // Constructor vac ío por ahora
         this.setBackground(Color.WHITE);
         titulo = new JLabel("EL JUEGO DEL AHORCADO");
 
-        this.add(titulo);
+        titulo = new JLabel("EL JUEGO DEL AHORCADO", SwingConstants.CENTER);
+
+        titulo.setFont(new Font("SansSerif", Font.BOLD, 32)); ///< Hemos escogido este tipo de letra
+        titulo.setForeground(new Color(60, 60, 60)); ///< Gris oscuro
+        titulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10)); ///< Sin borde
+        this.add(titulo, BorderLayout.CENTER);
 
         this.setVisible(true);
     }

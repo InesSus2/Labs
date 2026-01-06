@@ -1,8 +1,13 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
+
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
 
 public class PalabrasAdivJuegoPanel extends JPanel {
 
@@ -38,18 +43,47 @@ public class PalabrasAdivJuegoPanel extends JPanel {
         this.add(letrasPanel);
     }
 
-    // Método para actualizar una letra
+    /************************ setLetra() *********************************
+     * @brief  Método para actualizar una letra
+     * 
+     * @param posicion Posicion de la letrar
+     * @param letra letra introducida
+     ********************************************************************/
     public void setLetra(int posicion, char letra) {
         palabraAdivinada.set(posicion, letra);
         letrasLabels.get(posicion).setText(String.valueOf(letra));
     }
 
+    /*********************************************************************
+     * @brief Getters de los atributos necesarios
+     ********************************************************************/
     public ArrayList<JLabel> getLetrasLabels() {
         return letrasLabels;
     }
 
     public ArrayList<Character> getPalabraAdivinada() {
         return palabraAdivinada;
+    }
+    
+    /******************* actualizarPalabraAdivinada() ********************
+     * @brief  Método para actualizar la palabra adivinada
+     * en el panel de juego
+     * 
+     * @param palabraPorAdivinar Palabra que hay que adivinar
+     * @param letraProbada letra introducida
+     * @param colorLetra color letra acertada 
+     ********************************************************************/
+    public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
+        letraProbada = Character.toUpperCase(letraProbada);
+        palabraPorAdivinar = palabraPorAdivinar.toUpperCase();
+
+        for (int i = 0; i < palabraPorAdivinar.length(); i++) {
+            ///< Si la letra probada coincide con la letra real
+            if (palabraPorAdivinar.charAt(i) == letraProbada) {
+                setLetra(i, letraProbada);
+            letrasLabels.get(i).setForeground(colorLetra);
+            }
+        }
     }
 
     public static void main(String[] args) {

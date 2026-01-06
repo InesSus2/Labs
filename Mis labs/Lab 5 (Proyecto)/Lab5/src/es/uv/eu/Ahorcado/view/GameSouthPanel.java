@@ -1,63 +1,59 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
+
 public class GameSouthPanel extends JPanel{
-    private PalabrasAdivJuegoPanel palabrasAdivJuegoPanel;
     private IntroduceLetraPanel introduceLetraPanel;
 
-    public GameSouthPanel(int numLetters){
+    public GameSouthPanel(){
         this.setLayout(new BorderLayout());
-        palabrasAdivJuegoPanel = new PalabrasAdivJuegoPanel(numLetters);
         introduceLetraPanel = new IntroduceLetraPanel();
 
-        palabrasAdivJuegoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        introduceLetraPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        this.add(palabrasAdivJuegoPanel, BorderLayout.WEST);
-        this.add(introduceLetraPanel, BorderLayout.EAST);
+        this.add(introduceLetraPanel, BorderLayout.CENTER);
 
         this.setVisible(true);
     }
 
+    /*********************** getLetraIntroducida() ***********************
+     * @brief Getter para la letra introducida
+     * 
+     * @return Letra introducida
+     ********************************************************************/
     public char getLetraIntroducida() {
         return introduceLetraPanel.getLetraIntroducida();
     }
 
-    public void mostrarLetra(char letra, Color c) {
-        // Convertir a mayúscula para consistencia
-        letra = Character.toUpperCase(letra);
-
-        // Recorremos los JLabel de PalabrasAdivJuegoPanel
-        for (int i = 0; i < palabrasAdivJuegoPanel.getLetrasLabels().size(); i++) {
-            JLabel label = palabrasAdivJuegoPanel.getLetrasLabels().get(i);
-            // Solo sustituimos la _ si la letra coincide con la letra secreta en esa posición
-            if (palabrasAdivJuegoPanel.getPalabraAdivinada().get(i) == '_') {
-                // Aquí asumimos que la letra coincide con la introducida por el usuario
-                // Esto sustituye la _ por la letra
-                label.setText(String.valueOf(letra));
-                label.setForeground(c);
-
-                // Actualizamos el ArrayList interno
-                palabrasAdivJuegoPanel.getPalabraAdivinada().set(i, letra);
-            }
-        }
-
-        // Refrescar el panel
-        palabrasAdivJuegoPanel.repaint();
+    /*********************** getTextoIntroducido() ***********************
+     * @brief Getter para el texto introducido
+     * 
+     * @return Texto introducido
+     ********************************************************************/
+    public String getTextoIntroducido() {
+        return introduceLetraPanel.getTextoIntroducido();
     }
 
+    /************************** resetTextField() *************************
+     * @brief Método para resetear la configuración del textField del
+     * panel GameSouthPanel
+     ********************************************************************/
     public void resetTextField(){
         introduceLetraPanel.resetTextField();
     }
 
+    /************************ setActionListener() *************************
+     * @brief Asigna un ActionListener a todos los elementos del menú
+     * 
+     * @param listener ActionListener a asignar
+     ********************************************************************/
     public void setActionListener(ActionListener listener){
         introduceLetraPanel.setActionListener(listener);
     }
@@ -66,7 +62,7 @@ public class GameSouthPanel extends JPanel{
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba GameSouthPanel");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new GameSouthPanel(3));
+            frame.add(new GameSouthPanel());
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

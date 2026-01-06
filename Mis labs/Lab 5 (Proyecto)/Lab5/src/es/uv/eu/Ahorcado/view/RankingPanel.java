@@ -1,15 +1,22 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
+import es.uv.eu.Ahorcado.model.AhorcadoModel.Persona;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
-import Ahorcado.model.AhorcadoModel.Persona;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
 
 public class RankingPanel extends JPanel{
     private Persona[] p;
@@ -27,10 +34,8 @@ public class RankingPanel extends JPanel{
         this.p = p_vec;
         
         ok = new JButton("OK");
-        ok.setActionCommand("OkRanking"); // Se pone el action command para el boton de ok dentro del ranking
+        ok.setActionCommand("OkRanking"); ///< Se pone el action command para el boton de ok dentro del ranking
         ok.setFont(new Font("SANS_SERIF", 3, 30));
-        //ok.setBackground(Color.RED);
-        //ok.setForeground(Color.WHITE);
         
         panelPersona = new JPanel();
         panelPersona.setLayout(new GridLayout(personas, 1, 1, 1));
@@ -47,9 +52,9 @@ public class RankingPanel extends JPanel{
         JLabel aux3 = new JLabel("Ganador/Perdedor");
         aux3.setFont(new Font("SANS_SERIF", 3, 15));
 
-        panelNorte.add(aux1); //Panel de "Nombre"
-        panelNorte.add(aux2); //Panel de "Intentos"
-        panelNorte.add(aux3); //Panel de "Ganador/Perdedor"
+        panelNorte.add(aux1); ///< Panel de "Nombre"
+        panelNorte.add(aux2); ///< Panel de "Intentos"
+        panelNorte.add(aux3); ///< Panel de "Ganador/Perdedor"
 
         panelNorte.setBorder(new EtchedBorder(1));
         panelNorte.setBackground(new Color(104, 171, 99));
@@ -69,9 +74,9 @@ public class RankingPanel extends JPanel{
             intentos[i].setBorder(new EtchedBorder(1));
             intentos[i].setFont(new Font("SANS_SERIF", 3, 25));
             
-            if (p[i].getGanar() == 1) { //Si es 1 es ganador
+            if (p[i].getGanar() == 1) { ///< Si es 1 es ganador
                 ganador[i] = new JLabel("Ganador");
-            } else { // si no es perdedor
+            } else { ///< Si es 0 es perdedor
                 ganador[i] = new JLabel("Perdedor");
             }
 
@@ -86,17 +91,30 @@ public class RankingPanel extends JPanel{
             panelPersona.add(panelCentro[i]);
             
             i++;
-        } while (i < personas); ///DO-WHILE
+        } while (i < personas); ///< DO-WHILE
 
         this.add(panelPersona, BorderLayout.CENTER);
         this.add(ok, BorderLayout.SOUTH);
     }
 
-    /**
-     * Listeners para el boton OK de ranking
-     * @param al 
-     */
+    /************************ setActionListener() ************************
+     * @brief Asigna un ActionListener a todos los elementos del panel
+     * 
+     * @param al ActionListener a asignar
+     ********************************************************************/
     public void setActionListener(ActionListener al) {
         ok.addActionListener(al);
+    }
+    
+     public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Prueba PalabrasAdivJuegoPanel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //Persona p=new Persona("Hola", 1, 1);
+            //frame.add(new RankingPanel(p));
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }

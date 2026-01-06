@@ -1,20 +1,21 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class ConfiguracionPanel extends JPanel{
     private NombreUsuPanel nombreUsuPanel;
@@ -25,57 +26,98 @@ public class ConfiguracionPanel extends JPanel{
     private JButton comenzar;
 
     public ConfiguracionPanel() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(Color.WHITE);
+       setBackground(Color.WHITE);
+        setLayout(new BorderLayout(0, 15)); ///< Separación vertical entre centro y botón
 
         nombreUsuPanel = new NombreUsuPanel();
         numeroLetrasPanel = new NumeroLetrasPanel();
         temaPalabraPanel = new TemaPalabraPanel();
         estiloDibujoPanel = new EstiloDibujoPanel();
         colorLetrasPanel = new ColorLetrasPanel();
+
         comenzar = new JButton("COMENZAR PARTIDA");
         comenzar.setActionCommand("ComenzarPartida");
-        comenzar.setAlignmentX(CENTER_ALIGNMENT);
+        comenzar.setPreferredSize(new Dimension(220, 35)); ///< Botón pequeño
 
-        this.add(nombreUsuPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(numeroLetrasPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(temaPalabraPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(estiloDibujoPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(colorLetrasPanel);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(comenzar);
+        ///< Centro: los 5 bloques ocupan el espacio grande
+        JPanel form = new JPanel(new GridLayout(5, 1));
+        form.setBackground(Color.WHITE);
+        form.add(nombreUsuPanel);
+        form.add(numeroLetrasPanel);
+        form.add(temaPalabraPanel);
+        form.add(estiloDibujoPanel);
+        form.add(colorLetrasPanel);
 
-        this.setVisible(true);
+        ///< Abajo: panel pequeño que contiene el botón centrado
+        JPanel botonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        botonPanel.setBackground(Color.WHITE);
+        botonPanel.add(comenzar);
+
+        ///< Márgenes exteriores
+        setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
+
+        add(form, BorderLayout.CENTER);
+        add(botonPanel, BorderLayout.SOUTH);
     }
 
+    /************************* getTemaPalabra() **************************
+     * @brief Getter para el tema de la palabra seleccionado
+     * 
+     * @return Tema de la palabra seleccionado
+     ********************************************************************/
     public String getTemaPalabra() {
         return temaPalabraPanel.getTemaPalabra();
     }
 
+    /************************* getEstiloDibujo() *************************
+     * @brief Getter para el estilo del dibujo seleccionado
+     * 
+     * @return Estilo del dibujo seleccionado
+     ********************************************************************/
     public String getEstiloDibujo() {
         return estiloDibujoPanel.getEstiloDibujo();
     }
 
+    /************************* getSlider() *******************************
+     * @brief Getter para el número de letras seleccionado
+     * 
+     * @return Número de letras seleccionado
+     ********************************************************************/
     public int getSlider() {
         return numeroLetrasPanel.getSlider();
     }
 
+    /************************* getNombreUsu() ****************************
+     * @brief Getter para el nombre de usuario seleccionado
+     * 
+     * @return Nombre de usuario seleccionado
+     ********************************************************************/
     public String getNombreUsu() {
         return nombreUsuPanel.getNombreUsu();
     }
 
+    /************************* getColorLetrasAdiv() **********************
+     * @brief Getter para el color de las letras adivinadas
+     * 
+     * @return Color de las letras adivinadas
+     ********************************************************************/
     public String getColorLetrasAdiv() {
         return colorLetrasPanel.getColorLetrasAdiv();
     }
 
+    /************************* getColorLetrasUtil() **********************
+     * @brief Getter para el color de las letras utilizadas
+     * 
+     * @return Color de las letras utilizadas
+     ********************************************************************/
     public String getColorLetrasUtil() {
         return colorLetrasPanel.getColorLetrasUtil();
     }
 
+    /****************************** reset() ******************************
+     * @brief Método para resetear la configuración del
+     * panel de ConfiguracionPanel
+     ********************************************************************/
     public void reset() {
         nombreUsuPanel.resetNombreUsu();
         numeroLetrasPanel.setValue(5);
@@ -84,8 +126,12 @@ public class ConfiguracionPanel extends JPanel{
         colorLetrasPanel.reset(0);
     }
 
+    /************************ setActionListener() ************************
+     * @brief Asigna un ActionListener a todos los elementos del panel
+     * 
+     * @param actionListener ActionListener a asignar
+     ********************************************************************/
     public void setActionListener(ActionListener actionListener){
-        ///numeroLetrasPanel.setActionListener(actionListener); ///< TIENE EL METODO getValue()
         temaPalabraPanel.setActionListener(actionListener);
         estiloDibujoPanel.setActionListener(actionListener);
         colorLetrasPanel.setActionListener(actionListener);

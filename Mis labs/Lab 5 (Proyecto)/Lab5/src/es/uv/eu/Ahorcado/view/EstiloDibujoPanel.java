@@ -1,4 +1,4 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import javax.swing.BoxLayout;
 import java.awt.Color;
@@ -11,11 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class EstiloDibujoPanel extends JPanel{
     private JLabel texto;
@@ -41,16 +40,31 @@ public class EstiloDibujoPanel extends JPanel{
         this.setVisible(true);
     }
 
+    /************************* getEstiloDibujo() *************************
+     * @brief Getter para el estilo del dibujo seleccionado
+     * 
+     * @return Estilo del dibujo seleccionado
+     ********************************************************************/
     public String getEstiloDibujo() {
         return (String) CBEstiloDibujo.getSelectedItem();
     }
 
-    public void setActionListener(ActionListener actionListener){
-        CBEstiloDibujo.addActionListener(actionListener);
-    }
-
+    /*************************** setSelectedItem() ***********************
+     * @brief Setter del estilo del dibujo seleccionado
+     * 
+     * @param string Estilo del dibujo a seleccionar
+     ********************************************************************/
     public void setSelectedItem(String string) {
         CBEstiloDibujo.setSelectedItem(string);
+    }
+
+    /************************ setActionListener() *************************
+     * @brief Asigna un ActionListener a todos los elementos del panel
+     * 
+     * @param actionListener ActionListener a asignar
+     ********************************************************************/
+    public void setActionListener(ActionListener actionListener){
+        CBEstiloDibujo.addActionListener(actionListener);
     }
 
     public static void main(String[] args) {

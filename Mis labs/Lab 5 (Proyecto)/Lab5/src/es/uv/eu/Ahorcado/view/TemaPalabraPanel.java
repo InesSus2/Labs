@@ -1,4 +1,4 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -11,11 +11,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class TemaPalabraPanel extends JPanel {
     private JLabel texto;
@@ -39,14 +38,29 @@ public class TemaPalabraPanel extends JPanel {
         this.add(CBTemasPalabra);
     }
 
+    /*********************************************************************
+     * @brief Getter para el tema de la palabra seleccionado
+     * 
+     * @return Tema de la palabra seleccionado
+     ********************************************************************/
     public String getTemaPalabra() {
         return (String) CBTemasPalabra.getSelectedItem();
     }
 
+    /*********************************************************************
+     * @brief Setter para el tema de la palabra seleccionado
+     * 
+     * @param string Tema de la palabra a seleccionar
+     ********************************************************************/
     public void setSelectedItem(String string) {
         CBTemasPalabra.setSelectedItem(string);
     }
 
+    /************************ setActionListener() *************************
+     * @brief Asigna un ActionListener a todos los elementos del panel
+     * 
+     * @param actionListener ActionListener a asignar
+     ********************************************************************/
     public void setActionListener(ActionListener actionListener){
         CBTemasPalabra.addActionListener(actionListener);
     }

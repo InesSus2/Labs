@@ -1,4 +1,4 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,11 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class NumeroLetrasPanel extends JPanel {
     private JLabel texto;
@@ -37,10 +36,20 @@ public class NumeroLetrasPanel extends JPanel {
         this.add(slider);
     }
 
+    /************************* getSlider() *******************************
+     * @brief Getter del slider del número de letras de la palabra
+     * 
+     * @return Valor del slider
+     ********************************************************************/
     public int getSlider() {
         return slider.getValue();
     }
 
+    /*************************** setValue() ******************************
+     * @brief Setter del valor del slider del número de letras de la palabra
+     * 
+     * @param value Valor a asignar al slider
+     ********************************************************************/
     public void setValue(int value) {
         slider.setValue(value);
     }

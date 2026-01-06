@@ -1,29 +1,24 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import Ahorcado.model.AhorcadoModel;
+import es.uv.eu.Ahorcado.model.AhorcadoModel;
 
-/**
- * Panel que muestra la imagen inicial del ahorcado
- * 
- * @author Inés
- * @author Natalia
- */
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
+
 public class ImagenIniPanel extends JPanel {
 
     private AhorcadoModel modelo;
-    private Border borde;
-    private BufferedImage imagenActual; // Cache
+    private BufferedImage imagenActual;
 
     public ImagenIniPanel(AhorcadoModel modelo) {
         this.modelo = modelo;
@@ -32,16 +27,13 @@ public class ImagenIniPanel extends JPanel {
         this.setLayout(new FlowLayout());
         this.setBackground(Color.WHITE);
 
-        borde = BorderFactory.createLineBorder(Color.BLACK, 1);
-        this.setBorder(borde);
-
         this.setPreferredSize(new Dimension(200, 200));
         this.setVisible(true);
     }
 
-    /**
-     * Método para actualizar la imagen desde fuera
-     */
+    /************************* actualizarImagen() ************************
+     * @brief Método para actualizar la imagen desde fuera
+     ********************************************************************/
     public void actualizarImagen() {
         System.out.println("ImagenIniPanel: Actualizando imagen...");
         if (modelo != null) {
@@ -54,6 +46,11 @@ public class ImagenIniPanel extends JPanel {
         }
     }
 
+    /************************* paintComponent() **************************
+     * @brief Método para pintar la imagen del ahorcado
+     * 
+     * @param g Objeto Graphics para pintar
+     ********************************************************************/
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -78,18 +75,6 @@ public class ImagenIniPanel extends JPanel {
                 null
             );
         }
-    }
-
-    public int translateX(int x) {
-        BufferedImage imagen = modelo.getImagenAhorcado();
-        if (imagen == null) return 0;
-        return x * imagen.getWidth() / this.getWidth();
-    }
-
-    public int translateY(int y) {
-        BufferedImage imagen = modelo.getImagenAhorcado();
-        if (imagen == null) return 0;
-        return y * imagen.getHeight() / this.getHeight();
     }
 
     public static void main(String[] args) {

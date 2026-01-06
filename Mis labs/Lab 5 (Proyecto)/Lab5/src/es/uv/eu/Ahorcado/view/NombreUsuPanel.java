@@ -1,4 +1,4 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -12,11 +12,10 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class NombreUsuPanel extends JPanel {
     private JTextArea nombreUsu;
@@ -47,10 +46,19 @@ public class NombreUsuPanel extends JPanel {
         this.setVisible(true);
     }
 
+    /*********************************************************************
+     * @brief Getter para el nombre de usuario introducido
+     * 
+     * @return Nombre de usuario introducido
+     ********************************************************************/
     public String getNombreUsu() {
         return nombreUsu.getText();
     }
 
+    /************************** resetNombreUsu() *************************
+     * @brief Método para resetear la configuración del textField del
+     * panel NombreUsuPanel
+     ********************************************************************/
     public void resetNombreUsu() {
         nombreUsu.setText("");
         nombreUsu.setEditable(true);

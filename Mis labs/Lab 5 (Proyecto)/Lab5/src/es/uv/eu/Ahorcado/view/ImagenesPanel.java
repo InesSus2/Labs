@@ -1,17 +1,18 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
+import es.uv.eu.Ahorcado.model.AhorcadoModel;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import Ahorcado.model.AhorcadoModel;
+import java.awt.BorderLayout;
+import static java.awt.BorderLayout.NORTH;
+import javax.swing.BorderFactory;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class ImagenesPanel extends JPanel{
     private TituloPanel tituloPanel;
@@ -19,15 +20,15 @@ public class ImagenesPanel extends JPanel{
     private AhorcadoModel model;
 
     public ImagenesPanel() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 
-        model = new AhorcadoModel(); //TODO Pasar la palabra secreta desde el controller
-                                    // TODO Mirar como pasar el Estilo del dibujo desde el controller
+        this.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        model = new AhorcadoModel();
         tituloPanel = new TituloPanel();
         imagenJuegoPanel = new ImagenIniPanel(model);
 
-        this.add(tituloPanel);
+        this.add(tituloPanel, NORTH);
         this.add(imagenJuegoPanel);
     }
 

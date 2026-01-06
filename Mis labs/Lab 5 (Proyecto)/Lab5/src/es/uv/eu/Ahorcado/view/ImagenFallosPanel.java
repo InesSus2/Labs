@@ -1,18 +1,21 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-
-import Ahorcado.model.AhorcadoModel;
-
+import es.uv.eu.Ahorcado.model.AhorcadoModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
 
 public class ImagenFallosPanel extends JPanel {
 
@@ -32,20 +35,23 @@ public class ImagenFallosPanel extends JPanel {
         this.setVisible(true);
     }
 
-    /**
-     * Método para actualizar el modelo (cuando se cambia de palabra o estilo)
-     */
+    /**************************** setModelo() ****************************
+     * @brief Método para actualizar el modelo
+     * (cuando se cambia de palabra o estilo)
+     * 
+     * @param nuevoModelo Nuevo modelo a asignar
+     ********************************************************************/
     public void setModelo(AhorcadoModel nuevoModelo) {
         this.modelo = nuevoModelo;
-        repaint(); // Forzar repintado con el nuevo modelo
+        repaint();  ///< Forzar repintado con el nuevo modelo
     }
 
-    /**
-     * Método para forzar la actualización de la imagen
-     */
+    /************************* actualizarImagen() ************************
+     * @brief Método para forzar la actualización de la imagen
+     ********************************************************************/
     public void actualizarImagen() {
         System.out.println("ImagenFallosPanel: Solicitando repintado...");
-        // Forzar repintado en el hilo de Swing
+         ///< Forzar repintado en el hilo de Swing
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -55,19 +61,20 @@ public class ImagenFallosPanel extends JPanel {
         });
     }
 
+    /************************* paintComponent() **************************
+     * @brief Método para pintar la imagen del ahorcado
+     * 
+     * @param g Objeto Graphics para pintar
+     ********************************************************************/
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         System.out.println("ImagenFallosPanel: Repintando componente...");
-
-        // Limpiar el área primero
-        g.clearRect(0, 0, getWidth(), getHeight());
         
         if (modelo != null) {
             BufferedImage imagen = modelo.getImagenAhorcado();
             if (imagen != null) {
-                System.out.println("ImagenFallosPanel: Dibujando imagen de tamaño " + 
-                                 imagen.getWidth() + "x" + imagen.getHeight());
+                System.out.println("ImagenFallosPanel: Dibujando imagen de tamaño " + imagen.getWidth() + "x" + imagen.getHeight());
                 g.drawImage(
                     imagen,
                     0,
@@ -78,7 +85,7 @@ public class ImagenFallosPanel extends JPanel {
                 );
             } else {
                 System.out.println("ImagenFallosPanel: La imagen es NULL");
-                // Dibujar un mensaje de error
+                ///< Dibujar un mensaje de error
                 g.setColor(Color.RED);
                 g.drawString("No hay imagen", 10, 50);
             }
@@ -89,22 +96,10 @@ public class ImagenFallosPanel extends JPanel {
         }
     }
 
-    public int translateX(int x) {
-        BufferedImage imagen = modelo.getImagenAhorcado();
-        if (imagen == null) return 0;
-        return x * imagen.getWidth() / this.getWidth();
-    }
-
-    public int translateY(int y) {
-        BufferedImage imagen = modelo.getImagenAhorcado();
-        if (imagen == null) return 0;
-        return y * imagen.getHeight() / this.getHeight();
-    }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba ImagenFallosPanel");
-            AhorcadoModel modelo = new AhorcadoModel(); // constructor sin parámetros
+            AhorcadoModel modelo = new AhorcadoModel(); ///< Constructor sin parámetros
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(600, 600);

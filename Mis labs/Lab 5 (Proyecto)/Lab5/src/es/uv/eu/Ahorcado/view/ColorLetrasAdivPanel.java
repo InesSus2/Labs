@@ -1,27 +1,34 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
-/**
- * 
+/*********************************************************************
  * @author Inés Jaso Pernod
  * @author Natalia Tauste Rubio
- */
+ ********************************************************************/
 
 public class ColorLetrasAdivPanel extends JPanel{
     private JLabel coloresAdiv;
     private JComboBox<String> CBColoresLetrasAdiv;
-    private String[] colores = {"🟥 Rojo", "🟦 Azul", "🟩 Verde", "🟨 Amarillo", "🟧 Naranja"};
+    private String[] colores = {"Rojo", "Azul", "Verde", "Amarillo", "Naranja"};
 
     public ColorLetrasAdivPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -35,25 +42,112 @@ public class ColorLetrasAdivPanel extends JPanel{
         CBColoresLetrasAdiv.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         CBColoresLetrasAdiv.setMaximumSize(new Dimension(200, 50));
+        
+        ///< Renderer: pinta una muestra de color + el texto
+        CBColoresLetrasAdiv.setRenderer((ListCellRenderer<? super String>) new ColorComboRenderer());
 
         this.add(coloresAdiv);
         this.add(Box.createVerticalStrut(1));
         this.add(CBColoresLetrasAdiv);
     }
 
+    /************************ getColorLetrasAdiv() ***********************
+     * @brief Getter para el color de las letras adivinadas
+     * 
+     * @return Color de las letras adivinadas
+     ********************************************************************/
     public String getColorLetrasAdiv() {
         return (String) CBColoresLetrasAdiv.getSelectedItem();
     }
 
-    public void setSelectedIndex(int index/*String string*/) {
+    /************************ setSelectedIndex() *************************
+     * @brief Setter del índice seleccionado
+     * 
+     * @param index Índice a seleccionar
+     ********************************************************************/
+    public void setSelectedIndex(int index) {
         CBColoresLetrasAdiv.setSelectedIndex(index);
     }
 
+    /************************ setActionListener() ************************
+     * @brief Asigna un ActionListener a todos los elementos del panel
+     * 
+     * @param actionListener ActionListener a asignar
+     ********************************************************************/
     public void setActionListener (ActionListener actionListener){
         CBColoresLetrasAdiv.addActionListener(actionListener);
     }
 
+    ///< Renderer
+    private class ColorComboRenderer extends DefaultListCellRenderer {
+        private final Icon redIcon = new ColorIcon(new Color(220, 60, 60));
+        private final Icon blueIcon = new ColorIcon(new Color(60, 120, 220));
+        private final Icon greenIcon = new ColorIcon(new Color(60, 170, 90));
+        private final Icon yellowIcon = new ColorIcon(new Color(235, 200, 60));
+        private final Icon orangeIcon = new ColorIcon(new Color(240, 140, 60));
 
+        @Override
+        public Component getListCellRendererComponent(
+                JList<?> list, Object value, int index,
+                boolean isSelected, boolean cellHasFocus) {
+
+            JLabel lbl = (JLabel) super.getListCellRendererComponent(
+                    list, value, index, isSelected, cellHasFocus);
+
+            String name = (value == null) ? "" : value.toString();
+            lbl.setText(name);
+            lbl.setIcon(iconFor(name));
+            lbl.setIconTextGap(10);
+
+            //para que se vea bien
+            lbl.setBorder(BorderFactory.createEmptyBorder(4, 6, 4, 6));
+            return lbl;
+        }
+
+        private Icon iconFor(String name) {
+            return switch (name) {
+                case "Rojo" -> redIcon;
+                case "Azul" -> blueIcon;
+                case "Verde" -> greenIcon;
+                case "Amarillo" -> yellowIcon;
+                case "Naranja" -> orangeIcon;
+                default -> null;
+            };
+        }
+    }
+
+    ///< Icono “muestra de color” (circulito)
+    private static class ColorIcon implements Icon {
+        private final Color color;
+        private final int size;
+
+        public ColorIcon(Color color) {
+            this(color, 14);
+        }
+
+        public ColorIcon(Color color, int size) {
+            this.color = color;
+            this.size = size;
+        }
+
+        @Override public int getIconWidth() { return size; }
+        @Override public int getIconHeight() { return size; }
+
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            g2.setColor(color);
+            g2.fillOval(x, y, size, size);
+
+            g2.setColor(new Color(0,0,0,80)); // borde suave
+            g2.drawOval(x, y, size, size);
+
+            g2.dispose();
+        }
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba ColorLetrasAdivPanel");

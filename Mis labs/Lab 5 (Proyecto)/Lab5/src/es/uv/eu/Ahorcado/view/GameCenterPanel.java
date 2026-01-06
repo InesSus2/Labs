@@ -1,5 +1,6 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
+import es.uv.eu.Ahorcado.model.AhorcadoModel;
 import java.awt.Color;
 
 import javax.swing.BoxLayout;
@@ -7,71 +8,92 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import Ahorcado.model.AhorcadoModel;
+import java.awt.BorderLayout;
+import java.awt.Component;
+
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
 
 public class GameCenterPanel extends JPanel{
     private ImagenFallosPanel imagenFallosPanel;
-    private LetrasUtilJuegoPanel letrasUtilJuegoPanel;
+    private PalabrasAdivJuegoPanel palabrasAdivJuegoPanel;
     private AhorcadoModel model;
 
-    public GameCenterPanel(AhorcadoModel model){
+    public GameCenterPanel(AhorcadoModel model, int numLetters){
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.model = model;
         imagenFallosPanel = new ImagenFallosPanel(model);
-        letrasUtilJuegoPanel = new LetrasUtilJuegoPanel();
+         palabrasAdivJuegoPanel = new PalabrasAdivJuegoPanel(numLetters);
+
+        palabrasAdivJuegoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        
 
         this.add(imagenFallosPanel);
-        this.add(letrasUtilJuegoPanel);
+        this.add(palabrasAdivJuegoPanel, BorderLayout.CENTER);
 
         this.setVisible(true);
     }
 
-    /**
-     * Método para actualizar la imagen del ahorcado
-     */
+    /********************* actualizarImagenAhorcado() ********************
+     * @brief Actualiza la imagen del ahorcado en el panel de juego
+     ********************************************************************/
     public void actualizarImagenAhorcado() {
         if (imagenFallosPanel != null) {
             imagenFallosPanel.actualizarImagen();
         }
     }
-
-    public void setPuntuacionUsuLabel(int puntuacion) {
-        letrasUtilJuegoPanel.setPuntuacionUsuLabel(puntuacion);
-    }
-
+    
+    /********************* mostrarLetra() ********************************
+     * @brief Metodo para mostrar las letras acertadas
+     * en su panel palabrasAdivJuegoPanel
+     * 
+     * @param letra Letra introducida en el juego
+     * @param c Color de las letras acertadas
+     ********************************************************************/
     public void mostrarLetra(char letra, Color c) {
-        // Convertir a mayúscula para consistencia
-        letra = Character.toUpperCase(letra);
+        letra = Character.toUpperCase(letra);  ///< Convertir a mayúscula para consistencia
 
-        // Recorremos los JLabel de LetrasUtilJuegoPanel
-        for (int i = 0; i < letrasUtilJuegoPanel.getLetrasLabels().size(); i++) {
-            JLabel label = letrasUtilJuegoPanel.getLetrasLabels().get(i);
-            // Solo sustituimos la _ si la letra coincide con la letra secreta en esa posición
-            if (letrasUtilJuegoPanel.getPalabraAdivinada().get(i) == '_') {
-                // Aquí asumimos que la letra coincide con la introducida por el usuario
-                // Esto sustituye la _ por la letra
+         ///< Recorremos los JLabel de PalabrasAdivJuegoPanel
+        for (int i = 0; i < palabrasAdivJuegoPanel.getLetrasLabels().size(); i++) {
+            JLabel label = palabrasAdivJuegoPanel.getLetrasLabels().get(i);
+             ///< Solo sustituimos la _ si la letra coincide con la letra secreta en esa posición
+            if (palabrasAdivJuegoPanel.getPalabraAdivinada().get(i) == '_') {
+                 ///< Aquí asumimos que la letra coincide con la introducida por el usuario
+                 ///< Esto sustituye la _ por la letra
                 label.setText(String.valueOf(letra));
                 label.setForeground(c);
 
-                // Actualizamos el ArrayList interno
-                letrasUtilJuegoPanel.getPalabraAdivinada().set(i, letra);
+                 ///< Actualizamos el ArrayList interno
+                palabrasAdivJuegoPanel.getPalabraAdivinada().set(i, letra);
             }
         }
 
-        // Refrescar el panel
-        letrasUtilJuegoPanel.repaint();
+         ///< Refrescar el panel
+        palabrasAdivJuegoPanel.repaint();
     }
 
-    public void appendTextArea(char letra, Color color, int fallos) {
-        letrasUtilJuegoPanel.appendTextArea(letra, color, fallos);
+    /********************* actualizarPalabraAdivinada() ******************
+     * @brief Método para actualizar la palabra adivinada
+     * en el panel de juego
+     * 
+     * @param palabraPorAdivinar Palabra a adivinar
+     * @param letraProbada Letra introducida por el usuario
+     * @param colorLetra Color de la letra
+     ********************************************************************/
+    public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
+        palabrasAdivJuegoPanel.actualizarPalabraAdivinada(palabraPorAdivinar, letraProbada, colorLetra);
     }
-
+    
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Prueba GameCenterPanel");
             AhorcadoModel model = new AhorcadoModel("OSO");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new GameCenterPanel(model));
+            frame.add(new GameCenterPanel(model, 3));
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

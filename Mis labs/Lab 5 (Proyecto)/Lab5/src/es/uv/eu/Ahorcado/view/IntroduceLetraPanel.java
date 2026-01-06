@@ -1,7 +1,6 @@
-package Ahorcado.view;
+package es.uv.eu.Ahorcado.view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -12,6 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+/*********************************************************************
+ * @author Inés Jaso Pernod
+ * @author Natalia Tauste Rubio
+ ********************************************************************/
+
 public class IntroduceLetraPanel extends JPanel{
     private JLabel introduceLetraLabel;
     private JTextField introduceLetraField;
@@ -21,44 +25,62 @@ public class IntroduceLetraPanel extends JPanel{
         this.setLayout(new BorderLayout(10, 0));
 
         introduceLetraLabel = new JLabel("Introduce la letra:");
-        introduceLetraField = new JTextField();
+        introduceLetraField = new JTextField(10);
         aceptarLetraButton = new JButton("OK");
 
         aceptarLetraButton.setActionCommand("AceptarLetra");
+        introduceLetraField.setActionCommand("AceptarLetra");
 
-        introduceLetraField.setPreferredSize(new Dimension(150, 20));
-        introduceLetraField.setMaximumSize(new Dimension(150, 20));
-        introduceLetraField.setMinimumSize(new Dimension(150, 20));
-
+        introduceLetraField.setPreferredSize(new Dimension(500, 30));
+        aceptarLetraButton.setPreferredSize(new Dimension(70, 39));
+    
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-
-        introduceLetraLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        introduceLetraField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        leftPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
         leftPanel.add(introduceLetraLabel);
         leftPanel.add(introduceLetraField);
 
-        this.add(leftPanel, BorderLayout.WEST);
+        add(leftPanel, BorderLayout.CENTER);
 
-        aceptarLetraButton.setPreferredSize(new Dimension(60, 24));
-        JPanel southPanel = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-        southPanel.add(aceptarLetraButton);
-        this.add(southPanel, BorderLayout.SOUTH);
+        JPanel rightPanel = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        rightPanel.add(aceptarLetraButton);
+        add(rightPanel, BorderLayout.EAST);
     }
 
+    /*********************** getLetraIntroducida() ***********************
+     * @brief Getter para la letra introducida
+     * 
+     * @return Letra introducida
+     ********************************************************************/
     public char getLetraIntroducida() {
         return introduceLetraField.getText().charAt(0);
     }
 
+    /*********************** getTextoIntroducido() ***********************
+     * @brief Getter para el texto introducido
+     * 
+     * @return Texto introducido
+     ********************************************************************/
+    public String getTextoIntroducido() {
+        return introduceLetraField.getText().trim();
+    }
+
+    /************************** resetTextField() *************************
+     * @brief Método para resetear la configuración del textField del
+     * panel IntroduceLetraPanel
+     ********************************************************************/
     public void resetTextField(){
         introduceLetraField.setText("");
         introduceLetraField.setEditable(true);
     }
 
+    /************************ setActionListener() *************************
+     * @brief Asigna un ActionListener a todos los elementos del menú
+     * 
+     * @param listener ActionListener a asignar
+     ********************************************************************/
     public void setActionListener(ActionListener listener){
         aceptarLetraButton.addActionListener(listener);
+        introduceLetraField.addActionListener(listener); //Enter también lo lanza
     }
 
     public static void main(String[] args) {
