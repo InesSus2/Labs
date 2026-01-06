@@ -15,6 +15,8 @@
 
 Bienvenido al **Juego del Ahorcado**, una versión digital del clásico juego de adivinanza de palabras. En este juego, debes adivinar una palabra letra por letra antes de que se complete el dibujo del ahorcado. En este caso puedes fallar un máximo de 5 veces antes de perder la patida.
 
+- Para ejecutar el juego hay que ejecutar el archivo: **Lab5.java**
+
 ### Pantalla de Inicio
 
 Al iniciar el juego, verás la pantalla inicial con dos paneles:
