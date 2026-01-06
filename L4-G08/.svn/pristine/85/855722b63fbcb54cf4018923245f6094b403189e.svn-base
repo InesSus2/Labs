@@ -36,20 +36,13 @@ public class NumeroLetrasPanel extends JPanel {
         this.add(slider);
     }
 
-    /************************* getSlider() *******************************
-     * @brief Getter del slider del número de letras de la palabra
-     * 
-     * @return Valor del slider
+    /*********************************************************************
+     * @brief Getters y setters de los atributos necesarios
      ********************************************************************/
     public int getSlider() {
         return slider.getValue();
     }
 
-    /*************************** setValue() ******************************
-     * @brief Setter del valor del slider del número de letras de la palabra
-     * 
-     * @param value Valor a asignar al slider
-     ********************************************************************/
     public void setValue(int value) {
         slider.setValue(value);
     }

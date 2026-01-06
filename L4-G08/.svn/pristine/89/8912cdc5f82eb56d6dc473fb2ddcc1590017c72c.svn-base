@@ -5,9 +5,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import es.uv.eu.Ahorcado.model.AhorcadoModel;
 
 /*********************************************************************
@@ -18,7 +21,8 @@ import es.uv.eu.Ahorcado.model.AhorcadoModel;
 public class ImagenIniPanel extends JPanel {
 
     private AhorcadoModel modelo;
-    private BufferedImage imagenActual;
+    private Border borde;
+    private BufferedImage imagenActual; // Cache
 
     public ImagenIniPanel(AhorcadoModel modelo) {
         this.modelo = modelo;
@@ -27,13 +31,15 @@ public class ImagenIniPanel extends JPanel {
         this.setLayout(new FlowLayout());
         this.setBackground(Color.WHITE);
 
+        //this.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+
         this.setPreferredSize(new Dimension(200, 200));
         this.setVisible(true);
     }
 
-    /************************* actualizarImagen() ************************
-     * @brief Método para actualizar la imagen desde fuera
-     ********************************************************************/
+    /**
+     * Método para actualizar la imagen desde fuera
+     */
     public void actualizarImagen() {
         System.out.println("ImagenIniPanel: Actualizando imagen...");
         if (modelo != null) {
@@ -46,11 +52,6 @@ public class ImagenIniPanel extends JPanel {
         }
     }
 
-    /************************* paintComponent() **************************
-     * @brief Método para pintar la imagen del ahorcado
-     * 
-     * @param g Objeto Graphics para pintar
-     ********************************************************************/
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -75,6 +76,18 @@ public class ImagenIniPanel extends JPanel {
                 null
             );
         }
+    }
+
+    public int translateX(int x) {
+        BufferedImage imagen = modelo.getImagenAhorcado();
+        if (imagen == null) return 0;
+        return x * imagen.getWidth() / this.getWidth();
+    }
+
+    public int translateY(int y) {
+        BufferedImage imagen = modelo.getImagenAhorcado();
+        if (imagen == null) return 0;
+        return y * imagen.getHeight() / this.getHeight();
     }
 
     public static void main(String[] args) {

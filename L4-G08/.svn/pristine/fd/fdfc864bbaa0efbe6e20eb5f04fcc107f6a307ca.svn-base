@@ -19,9 +19,7 @@ import javax.swing.SwingUtilities;
 public class LetrasUtilJuegoPanel extends JPanel {
     private JLabel letrasUtilesLabel;
     private JLabel puntuUsuLabel;
-    private JLabel fallosUsuLabel;
     private JLabel puntuacionUsuLabel;
-    private JLabel numFallosUsuLabel;
     private JTextArea letrasUtilesArea;
     private ArrayList<JLabel> letrasLabels;
     private ArrayList<Character> palabraAdivinada;
@@ -38,13 +36,6 @@ public class LetrasUtilJuegoPanel extends JPanel {
         puntuPanel.add(puntuUsuLabel);
         puntuPanel.add(puntuacionUsuLabel);
 
-        JPanel fallosPanel = new JPanel();
-        fallosPanel.setLayout(new BoxLayout(fallosPanel, BoxLayout.X_AXIS));
-        fallosUsuLabel = new JLabel("Fallos actuales:  ");
-        numFallosUsuLabel = new JLabel("0");
-        fallosPanel.add(fallosUsuLabel);
-        fallosPanel.add(numFallosUsuLabel);
-
         letrasUtilesLabel = new JLabel("Letras utilizadas:");
         letrasUtilesArea = new JTextArea(5, 20);
         letrasUtilesArea.setEditable(false);
@@ -56,12 +47,10 @@ public class LetrasUtilJuegoPanel extends JPanel {
         letrasUtilesArea.setMinimumSize(new Dimension(300, 250));
 
         puntuPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        fallosPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         letrasUtilesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         letrasUtilesArea.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         this.add(puntuPanel);
-        this.add(fallosPanel);
         this.add(letrasUtilesLabel);
         this.add(letrasUtilesArea);
 
@@ -79,30 +68,10 @@ public class LetrasUtilJuegoPanel extends JPanel {
         return palabraAdivinada;
     }
 
-    /****************** Setters de los atributos necesarios **************
-     * @brief Setter de la puntuación del usuario
-     ********************************************************************/
     public void setPuntuacionUsuLabel(int puntuacion) {
         this.puntuacionUsuLabel.setText(String.valueOf(puntuacion));
     }
 
-    /************************ setNumFallosUsuLabel() **********************
-     * @brief Setter del número de fallos del usuario
-     * 
-     * @param numFallos Número de fallos del usuario
-     ********************************************************************/
-    public void setNumFallosUsuLabel(int numFallos) {
-        this.numFallosUsuLabel.setText(String.valueOf(numFallos));
-    }
-
-    /************************** appendTextArea() *************************
-     * @brief Método para actualizar la letra en el panel de
-     * letras utilizadas
-     * 
-     * @param letra Letra utilizada
-     * @param color Color de la letra utilizada
-     * @param fallos Numero de fallos
-     ********************************************************************/
     public void appendTextArea(char letra, Color color, int fallos) {
         ///< Verificar si la letra ya ha sido utilizada
         if (letrasUtilizadas.contains(letra)) {

@@ -74,9 +74,9 @@ public class RankingPanel extends JPanel{
             intentos[i].setBorder(new EtchedBorder(1));
             intentos[i].setFont(new Font("SANS_SERIF", 3, 25));
             
-            if (p[i].getGanar() == 1) { ///< Si es 1 es ganador
+            if (p[i].getGanar() == 1) { //Si es 1 es ganador
                 ganador[i] = new JLabel("Ganador");
-            } else { ///< Si es 0 es perdedor
+            } else { // si no es perdedor
                 ganador[i] = new JLabel("Perdedor");
             }
 
@@ -97,8 +97,8 @@ public class RankingPanel extends JPanel{
         this.add(ok, BorderLayout.SOUTH);
     }
 
-    /************************ setActionListener() ************************
-     * @brief Asigna un ActionListener a todos los elementos del panel
+    /************************ setActionListener() *************************
+     * @brief Asigna un ActionListener a todos los elementos del menú
      * 
      * @param al ActionListener a asignar
      ********************************************************************/

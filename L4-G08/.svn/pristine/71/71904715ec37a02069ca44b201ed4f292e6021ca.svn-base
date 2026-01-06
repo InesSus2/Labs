@@ -37,22 +37,21 @@ public class GameCenterPanel extends JPanel{
         this.setVisible(true);
     }
 
-    /********************* actualizarImagenAhorcado() ********************
+    /********************* actualizarImagenAhorcado() **********************
      * @brief Actualiza la imagen del ahorcado en el panel de juego
-     ********************************************************************/
+    ********************************************************************/
     public void actualizarImagenAhorcado() {
         if (imagenFallosPanel != null) {
             imagenFallosPanel.actualizarImagen();
         }
     }
     
-    /********************* mostrarLetra() ********************************
-     * @brief Metodo para mostrar las letras acertadas
-     * en su panel palabrasAdivJuegoPanel
+     /********************* mostrarLetra() *****************************
+     * @brief Metodo para mostrar las letras acertadas en su panel palabrasAdivJuegoPanel
      * 
      * @param letra Letra introducida en el juego
      * @param c Color de las letras acertadas
-     ********************************************************************/
+    ********************************************************************/
     public void mostrarLetra(char letra, Color c) {
         letra = Character.toUpperCase(letra);  ///< Convertir a mayúscula para consistencia
 
@@ -75,14 +74,14 @@ public class GameCenterPanel extends JPanel{
         palabrasAdivJuegoPanel.repaint();
     }
 
-    /********************* actualizarPalabraAdivinada() ******************
-     * @brief Método para actualizar la palabra adivinada
-     * en el panel de juego
-     * 
-     * @param palabraPorAdivinar Palabra a adivinar
-     * @param letraProbada Letra introducida por el usuario
-     * @param colorLetra Color de la letra
-     ********************************************************************/
+    /********************* actualizarPalabraAdivinada() *****************************
+         * @brief Método para actualizar la palabra adivinada
+        * en el panel de juego
+        * 
+        * @param palabraPorAdivinar Palabra a adivinar
+        * @param letraProbada Letra introducida por el usuario
+        * @param colorLetra Color de la letra
+        ********************************************************************/
     public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
         palabrasAdivJuegoPanel.actualizarPalabraAdivinada(palabraPorAdivinar, letraProbada, colorLetra);
     }

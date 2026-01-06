@@ -25,8 +25,9 @@ public class GameNorthPanel extends JPanel{
         this.setVisible(true);
     }
 
-    /************************ setPuntuacionUsuLabel() ********************
+  /************************ setPuntuacionUsuLabel() *************************
      * @brief Método para actualizar la puntuacion del usuario
+     * 
      * 
      * @param puntuacion el numero de la puntuacion
      ********************************************************************/
@@ -34,18 +35,10 @@ public class GameNorthPanel extends JPanel{
         letrasUtilJuegoPanel.setPuntuacionUsuLabel(puntuacion);
     }
 
-    /************************ setNumFallosUsuLabel() **********************
-     * @brief Método para actualizar el número de fallos del usuario
-     * 
-     * @param numFallos Número de fallos del usuario
-     ********************************************************************/
-    public void setNumFallosUsuLabel(int numFallos) {
-        letrasUtilJuegoPanel.setNumFallosUsuLabel(numFallos);
-    }
-    
-    /*************************** appendTextArea() ***************************
-        * @brief Método para actualizar la letra en el panel de
-        * letras utilizadas
+
+    /********************* appendTextArea() *****************************
+        * @brief Método para actualizar la letra en el panel de letras utilizadas
+        * 
         * 
         * @param letra Letra utilizada
         * @param color Color de la letra utilizada

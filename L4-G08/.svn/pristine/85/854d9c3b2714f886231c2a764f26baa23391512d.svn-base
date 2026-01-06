@@ -38,9 +38,6 @@ public class AhorcadoController {
 
     }
 
-    /****************** AhorcadoControllerWindowListener() ***************
-     * @brief Clase para gestionar el evento de cerrar la ventana
-     ********************************************************************/
     class AhorcadoControllerWindowListener extends WindowAdapter{
         @Override
         public void windowClosing(WindowEvent e){
@@ -49,15 +46,11 @@ public class AhorcadoController {
         }
     }
 
-    /****************** AhorcadoControllerActionListener() ***************
-     * @brief Clase para gestionar los eventos de los ActionListeners
-     ********************************************************************/
     class AhorcadoControllerActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             String command = e.getActionCommand();
-            ///< Strings de las palabras según tema y tamaño
-            String animales[] = {"OSO", "GATO", "TIGRE", "JIRAFA", "BALLENA", "ELEFANTE"};
+            String animales[] = {"OSO", "GATO", "TIGRE", "JIRAFA", "PAJARO", "ELEFANTE"};
             String frutas[] = {"UVA", "PASA", "MANGO", "PAPAYA", "GUAYABO", "MARACUYA"};
             String geografia[] = {"FEZ", "CUBA", "PARIS", "PANAMA", "LETONIA", "PORTUGAL"};
 
@@ -334,7 +327,6 @@ public class AhorcadoController {
                             
                         } else {
                             fallos = model.getFallos();
-                            view.setNumFallosUsuLabel(fallos);
                             view.appendTextArea(letraChar, letraUtilizada, fallos);
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                             if(fallos == 5){
@@ -373,7 +365,6 @@ public class AhorcadoController {
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                         } else {
                             fallos = model.getFallos();
-                            view.setNumFallosUsuLabel(fallos);
                             view.appendTextArea(letraChar, letraUtilizada, fallos);
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                             if(fallos == 5){
@@ -413,7 +404,6 @@ public class AhorcadoController {
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                         } else {
                             fallos = model.getFallos();
-                            view.setNumFallosUsuLabel(fallos);
                             view.appendTextArea(letraChar, letraUtilizada, fallos);
                             System.out.println("/****************************** El valor de acierto es: " + acierto + " ******************************/");
                             if(fallos == 5){
@@ -438,19 +428,19 @@ public class AhorcadoController {
                     }
                     ///< Al poner la letra comprueba si la palabra ya está completa
                     if (model != null && model.palabraCompletada()) {
-                        ///< Guardar partida ganada en el ranking
-                        model.agregarRanking(nombreUsu, 1, puntuacion);
-                        
-                        JOptionPane.showMessageDialog(null, "¡Has acertado!");
-                        
-                        AhorcadoModel TempModel = (model != null) ? model : new AhorcadoModel();
-                        view.setVector(TempModel.mostrarRanking(), TempModel.getNumPersonas());
-                        view.postRanking();
-                        view.setRankingListener(al);
-                        view.repaint();
-                        model = null;
-                        break;
-                    }
+                            ///< Guardar partida ganada en el ranking
+                            model.agregarRanking(nombreUsu, 1, puntuacion);
+                            
+                            JOptionPane.showMessageDialog(null, "¡Has acertado!");
+                            
+                            AhorcadoModel TempModel = (model != null) ? model : new AhorcadoModel();
+                            view.setVector(TempModel.mostrarRanking(), TempModel.getNumPersonas());
+                            view.postRanking();
+                            view.setRankingListener(al);
+                            view.repaint();
+                            model = null;
+                            break;
+                        }
                     break;
 
                 case "OkRanking": ///< Comando para cerrar el ranking y volver a la pantalla principal
@@ -459,7 +449,7 @@ public class AhorcadoController {
                     view.repaint();
                     break;
                 default:
-                    System.out.println("/****************************** AhorcadoController: Comando no reconocido. ******************************/");
+                    System.out.println("AhorcadoController: Comando no reconocido. ******************************/");
                     break;
                 
             }

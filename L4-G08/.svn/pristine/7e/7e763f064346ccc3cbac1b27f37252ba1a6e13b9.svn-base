@@ -23,20 +23,14 @@ public class GameSouthPanel extends JPanel{
         this.setVisible(true);
     }
 
-    /*********************** getLetraIntroducida() ***********************
-     * @brief Getter para la letra introducida
-     * 
-     * @return Letra introducida
+    /*********************************************************************
+     * @brief Getters de los atributos necesarios
      ********************************************************************/
     public char getLetraIntroducida() {
         return introduceLetraPanel.getLetraIntroducida();
     }
 
-    /*********************** getTextoIntroducido() ***********************
-     * @brief Getter para el texto introducido
-     * 
-     * @return Texto introducido
-     ********************************************************************/
+  
     public String getTextoIntroducido() {
         return introduceLetraPanel.getTextoIntroducido();
     }

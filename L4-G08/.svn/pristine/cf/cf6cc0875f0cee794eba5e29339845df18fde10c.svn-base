@@ -46,20 +46,12 @@ public class IntroduceLetraPanel extends JPanel{
         add(rightPanel, BorderLayout.EAST);
     }
 
-    /*********************** getLetraIntroducida() ***********************
-     * @brief Getter para la letra introducida
-     * 
-     * @return Letra introducida
+    /*********************************************************************
+     * @brief Getters de los atributos necesarios
      ********************************************************************/
     public char getLetraIntroducida() {
         return introduceLetraField.getText().charAt(0);
     }
-
-    /*********************** getTextoIntroducido() ***********************
-     * @brief Getter para el texto introducido
-     * 
-     * @return Texto introducido
-     ********************************************************************/
     public String getTextoIntroducido() {
         return introduceLetraField.getText().trim();
     }

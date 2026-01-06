@@ -43,7 +43,7 @@ public class PalabrasAdivJuegoPanel extends JPanel {
         this.add(letrasPanel);
     }
 
-    /************************ setLetra() *********************************
+     /************************ setLetra() *************************
      * @brief  Método para actualizar una letra
      * 
      * @param posicion Posicion de la letrar
@@ -65,10 +65,9 @@ public class PalabrasAdivJuegoPanel extends JPanel {
         return palabraAdivinada;
     }
     
-    /******************* actualizarPalabraAdivinada() ********************
+     /************************ actualizarPalabraAdivinada() *************************
      * @brief  Método para actualizar la palabra adivinada
      * en el panel de juego
-     * 
      * @param palabraPorAdivinar Palabra que hay que adivinar
      * @param letraProbada letra introducida
      * @param colorLetra color letra acertada 

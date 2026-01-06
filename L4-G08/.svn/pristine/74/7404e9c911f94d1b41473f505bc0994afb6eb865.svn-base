@@ -39,39 +39,18 @@ public class JuegoPanel extends JPanel{
     }
 
     /*********************************************************************
-     * @brief Getter para la letra introducida en el panel JuegoPanel
-     * 
-     * @return Letra introducida
+     * @brief Getters de los atributos necesarios
      ********************************************************************/
     public char getLetraIntroducida() {
         return gameSouthPanel.getLetraIntroducida();
     }
 
-    /*********************************************************************
-     * @brief Getter para el texto introducido en el panel JuegoPanel
-     * 
-     * @return Texto introducido
-     ********************************************************************/
      public String getTextoIntroducido() {
         return gameSouthPanel.getTextoIntroducido();
     }
 
-    /********************** setPuntuacionUsuLabel() **********************
-     * @brief Setters de la puntuacion del usuario
-     * 
-     * @param puntuacion El numero de la puntuacion
-     ********************************************************************/
-    public void setPuntuacionUsuLabel(int puntuacion) {
-        gameNorthPanel.setPuntuacionUsuLabel(puntuacion);
-    }
-
-    /********************** setNumFallosUsuLabel() ***********************
-     * @brief Setters del número de fallos del usuario
-     * 
-     * @param numFallos Número de fallos del usuario
-     ********************************************************************/
-    public void setNumFallosUsuLabel(int numFallos) {
-        gameNorthPanel.setNumFallosUsuLabel(numFallos);
+    public void mostrarLetra(char letra, Color c) {
+        gameCenterPanel.mostrarLetra(letra, c);
     }
 
     /************************** resetTextField() *************************
@@ -82,34 +61,20 @@ public class JuegoPanel extends JPanel{
         gameSouthPanel.resetTextField();
     }
 
-    /************************** appendTextArea() *************************
-     * @brief Método para actualizar la letra en el panel de
-     * letras utilizadas
-     * 
-     * @param letra Letra utilizada
-     * @param color Color de la letra utilizada
-     * @param fallos Numero de fallos
-     ********************************************************************/
+    public void setPuntuacionUsuLabel(int puntuacion) {
+        gameNorthPanel.setPuntuacionUsuLabel(puntuacion);
+    }
+
     public void appendTextArea(char letra, Color color, int fallos) {
         gameNorthPanel.appendTextArea(letra, color, fallos);
     }
 
-    /********************* actualizarImagenAhorcado() ********************
-     * @brief Método para actualizar la imagen del ahorcado
-     ********************************************************************/
     public void actualizarImagenAhorcado() {
         if (gameCenterPanel != null) {
             gameCenterPanel.actualizarImagenAhorcado();
         }
     }
 
-    /********************** actualizarPalabraAdivinada() *****************
-     * @brief Método para actualizar la palabra a adivinar
-     * 
-     * @param palabraPorAdivinar Palabra a adivinar
-     * @param letraProbada Letra introducida por el usuario
-     * @param colorLetra Color de la letra
-     ********************************************************************/
     public void actualizarPalabraAdivinada(String palabraPorAdivinar, char letraProbada, Color colorLetra) {
         gameCenterPanel.actualizarPalabraAdivinada(palabraPorAdivinar, letraProbada, colorLetra);
     }
